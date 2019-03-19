@@ -1,0 +1,11 @@
+---
+
+- name: Configure and Customize mate-panels
+  include_role:
+    name: zoidy_panelsweet
+    tasks_from: panels-awesome
+    apply:
+      tags:
+        - panels-awesome
+  tags: panels-awesome
+
