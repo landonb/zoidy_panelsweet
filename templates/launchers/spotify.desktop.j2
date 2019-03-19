@@ -1,0 +1,16 @@
+#!/usr/bin/env xdg-open
+# vim:ft=desktop
+[Desktop Entry]
+Type=Application
+Name=Spotify
+Name[en_US]=Spotify
+GenericName=Music Player
+Icon=/snap/spotify/34/usr/share/spotify/icons/spotify-linux-128.png
+Icon[en_US]=spotify
+# 2019-03-05: Use kdocker, so Spotify minizimes to the tray.
+Exec=kdocker -q -o -l -m -i {{ ansible_env.HOME }}/.config/zoidy_matecocido/icons/spotify-linux-128-CROPPED-118.png env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/spotify_spotify.desktop /snap/bin/spotify %U
+Terminal=false
+MimeType=x-scheme-handler/spotify;
+Categories=Audio;Music;Player;AudioVideo;
+StartupWMClass=spotify
+

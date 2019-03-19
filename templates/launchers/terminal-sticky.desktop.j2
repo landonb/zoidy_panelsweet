@@ -1,0 +1,11 @@
+#!/usr/bin/env xdg-open
+# vim:ft=desktop
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Icon={{ ansible_env.HOME }}/.config/zoidy_matecocido/icons/terminal_and-glue_1166879.png
+Icon[en_US]={{ ansible_env.HOME }}/.config/zoidy_matecocido/icons/terminal_and-glue_1166879.png
+Name[en_US]=Termbud [sticky icky icky]
+Exec={{ ansible_env.HOME }}/.local/bin/bash -c "DUBS_ALWAYS_ON_VISIBLE=true mate-terminal {{ zoidy_matecocido_terminal_geometry }} -e {{ ansible_env.HOME }}/.local/bin/bash"
+Name=Termdub [normal]

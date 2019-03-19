@@ -1,0 +1,11 @@
+#!/usr/bin/env xdg-open
+# vim:ft=desktop
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Name={{ zoidy_matecocido_dubs_vim_name }}
+Name[en_US]={{ zoidy_matecocido_dubs_vim_name }}
+Exec={{ ansible_env.HOME }}/.local/bin/bash -c "{{ ansible_env.HOME }}/.local/bin/gvim --servername SAMPI --remote-silent {{ zoidy_matecocido_dubs_vim_edit }} && xdotool search --name SAMPI windowactivate && wmctrl -b add,sticky -r SAMPI"
+Icon={{ zoidy_matecocido_dubs_vim_icon }}
+Icon[en_US]={{ zoidy_matecocido_dubs_vim_icon }}

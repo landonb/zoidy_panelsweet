@@ -1,0 +1,132 @@
+---
+
+# ***
+
+- name: Reset Existing MATE Panel DConf, and Clear ~/.config/mate/panel2.d/default/launchers/
+  shell: dconf reset -f /org/mate/panel/
+
+- name: Kill Off MATE Panel While We Work
+  shell: killall -s 9 mate-panel
+
+# ***
+
+# dconf-reset will also perform equivalent of:
+#
+- name: Clear Existing MATE Panel Launcher Files
+  file:
+    state: absent
+    path: "{{ ansible_env.HOME }}/.config/mate/panel2.d/default/launchers/"
+
+- name: Ensure MATE Panel Launcher Directory Exists
+  file:
+    state: directory
+    path: "{{ ansible_env.HOME }}/.config/mate/panel2.d/default/launchers/"
+
+- name: Deploy Most MATE Panel Launchers
+  template:
+    src: "{{ item }}"
+    dest:
+      "{{ ansible_env.HOME }}/.config/mate/panel2.d/default/launchers/{{
+        item | basename | regex_replace('\\.j2$','')
+      }}"
+  with_fileglob:
+    - ../templates/launchers/*.desktop*
+
+- name: Deploy Dubs Vim Edit MATE Panel Launchers \#s 1-10
+  template:
+    src: ../templates/dubs-vim.desktop.j2
+    dest: "{{ ansible_env.HOME }}/.config/mate/panel2.d/default/launchers/{{ item.id }}.desktop"
+  vars:
+    zoidy_matecocido_dubs_vim_name: "{{ item.name }}"
+    zoidy_matecocido_dubs_vim_edit: "{{ item.edit }}"
+    zoidy_matecocido_dubs_vim_icon: "{{ item.icon }}"
+  loop: "{{ zoidy_matecocido_dubs_vim_launchers }}"
+
+# ***
+
+- name: Deploy (Synchronize) MATE Panel Launcher Icons
+  synchronize:
+    src: "../files/launcher-icons/"
+    dest: "{{ ansible_env.HOME }}/.config/zoidy_matecocido/icons/"
+    delete: yes
+
+# ***
+
+- set_fact:
+    list_sep: "', '"
+
+- name: Format custom panel object IDs list
+  set_fact:
+    custom_object_ids: ", '{{ zoidy_matecocido_panel_objects | map(attribute='object_id') | join(list_sep) }}'"
+
+# BEWARE: If you specify a position that causes overlap, mate-panel crashes.
+#
+# E.g., the following config
+#
+#   [objects/notification-area]
+#   #position=1382
+#   position=1409
+#   ...
+#
+#   [objects/zoidy-workspace-switcher]
+#   position=1562
+#   ...
+#
+# crashes mate-panel.
+#
+# You can restart `mate-panel &`
+# after fixing the error.
+#
+# Oddly, after you set the config, you can unlock notification-area
+# and move it rightward, so that its position is the same value that
+# crashed mate-panel. Oh, well.
+- name: Format default panel DConf, including custom object IDs
+  set_fact:
+    org_mate_panel_dconf: "{{ lookup('template', 'templates/org-mate-panel.dconf.j2') }}"
+
+# ***
+
+- name: Generate custom panel sections
+  shell: |
+    echo "[objects/{{ item.object_id }}]
+    toplevel-id='bottom'
+    object-type='launcher'
+    launcher-location={{ item.launcher_location }}
+    position={{ item.position }}
+    locked=true
+    panel-right-stick=false
+    "
+    #position={{ 36 + (index > 1 and 35 or 0) + (index > 2 and (31 * (index - 2)) or 0) }}
+  register: dconf_launcher_cmds
+  loop: "{{ zoidy_matecocido_panel_objects }}"
+  loop_control:
+    index_var: index
+
+- name: Format custom MATE panel DConf parts
+  set_fact:
+    dconf_launcher_objects: "{{ dconf_launcher_cmds.results | map(attribute='stdout') | join('\n') }}"
+
+# ***
+
+- name: Load Custom MATE Panel DConf
+  shell: dconf load /org/mate/panel/
+  args:
+    stdin: "{{ org_mate_panel_dconf + dconf_launcher_objects }}"
+
+# [lb]: I had issues with letting mate-panel react to dconf changes. It seemed
+# to work -- you'd see it sort of update after fiddling with dconf, above --
+# and they a final poke-restart sometimes work, e.g.,
+#   - name: Kill-to-Restart mate-panel, to reload window-list
+#     shell: sleep 5.0 ; killall -s SIGUSR1 mate-panel
+# but after running the task a few times, mate-panel would just end up
+# dead, and restarting it wouldn't work well, and then you'd have to logoff
+# and log back on, and then if you ran the task just once, it'd usually work.
+# So now the workflow is to kill mate-panel, do the work, and then restart it.
+# BEWARE: If you're running this task on the locally machine, you'll lose your
+# mouse connection to MATE until the panel is restarted, e.g., you won't be
+# able to access the menu or any launchers; what you can do is alt-tab to any
+# already-open terminals you have.
+
+- name: Restart mate-panel and hope that all is well
+  shell: mate-panel &
+
