@@ -1,0 +1,21 @@
+galaxy_info:
+  author: Tally Bark LLC
+  description: >
+    An Ansible role to customize mate-panel launchers and layout.
+  company: https://tallybark.com
+
+  license: GPLv3
+
+  min_ansible_version: 2.4
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - bionic
+
+  galaxy_tags:
+    # Tags use alphanums only, max 20 per role.
+    - development
+
+dependencies: []
+
