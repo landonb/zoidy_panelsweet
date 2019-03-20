@@ -1,7 +1,7 @@
 ---
 # Main task: Load package installers, or not, based on tags.
 
-- name: Load ‘all’ task dispatcher (zoidy_panelsweet)
+- name: Load tasks dispatcher for ‘zoidy_panelsweet’
   include_role:
     name: zoidy_panelsweet
     tasks_from: all
