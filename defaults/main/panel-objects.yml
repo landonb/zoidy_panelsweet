@@ -166,16 +166,16 @@ zoidy_matecocido_panel_objects:
     launcher_location: "'virtualbox.desktop'"
     position: "595"
 
-  - object_id: "zoidy-launcher-dia"
-    launcher_location: "'/usr/share/applications/dia.desktop'"
-    position: "619"
-
   - object_id: "zoidy-launcher-wireshark"
     launcher_location: "'/usr/share/applications/wireshark.desktop'"
-    position: "643"
+    position: "619"
 
   - object_id: "zoidy-launcher-gimp"
     launcher_location: "'/usr/share/applications/gimp.desktop'"
+    position: "643"
+
+  - object_id: "zoidy-launcher-dia"
+    launcher_location: "'/usr/share/applications/dia.desktop'"
     position: "667"
 
   - object_id: "zoidy-launcher-screenshot"
