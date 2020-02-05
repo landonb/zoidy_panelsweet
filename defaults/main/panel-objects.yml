@@ -159,7 +159,7 @@ zoidy_matecocido_panel_objects:
     position: "547"
 
   - object_id: "zoidy-launcher-meld"
-    launcher_location: "'/usr/share/applications/meld.desktop'"
+    launcher_location: "'meld.desktop'"
     position: "571"
 
   - object_id: "zoidy-launcher-virtualbox"
