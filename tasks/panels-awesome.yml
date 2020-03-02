@@ -130,3 +130,7 @@
 - name: Restart mate-panel and hope that all is well
   shell: mate-panel &
 
+# HOT-TIP/2020-03-01: I ran this task but the panel was not started -- indeed
+# there were no panels whatsoever until I ran `mate-panel &` from the terminal.
+- debug: msg="NOTE! You may need to run `mate-panel &` if the panel did not restart."
+
