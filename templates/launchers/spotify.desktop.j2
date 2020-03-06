@@ -8,7 +8,24 @@ GenericName=Music Player
 Icon=/snap/spotify/34/usr/share/spotify/icons/spotify-linux-128.png
 Icon[en_US]=spotify
 # 2019-03-05: Use kdocker, so Spotify minizimes to the tray.
-Exec=kdocker -q -o -l -m -i {{ ansible_env.HOME }}/.config/zoidy_matecocido/icons/spotify-linux-128-CROPPED-118.png env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/spotify_spotify.desktop /snap/bin/spotify %U
+# 2020-03-06: Building v5.2, b/c distro 5.0 not working in Mint 19.3 (so ~/.local/bin).
+# - Options (`~/.local/bin/kdocker -h`):                         Right-click menu item
+#   -q   Disable ballooning title changes (quiet)                !Balloon title changes
+#   -i <icon-file>
+# - Were on, now off, I think I prefer without:
+#   -o   Dock when obscured                                      Iconify when obscured
+#   -l   Iconify when focus lost                                 Iconify when focus lost
+#   -m   Keep application window showing (don't hide on dock)    !Iconify when minimized
+# - Have not tried (among other options):
+#   -s   Make the window sticky (appears on all desktops)        Sticky
+#          (Currently, if you're on another desktop and click tray icon,
+#           desktop will switch back to, e.g., the first desktop.)
+#   -t   Remove this application from the taskbar
+# - On by default and not controllable from CLI options?:        Lock to desktop
+# - If you're curious about BAMF_DESKTOP_FILE_HINT, you'll find it at & in:
+#     https://lazka.github.io/pgi-docs/Bamf-3/index.html
+#       src/bamf-matcher.c
+Exec={{ ansible_env.HOME }}/.local/bin/kdocker -q -i {{ ansible_env.HOME }}/.config/zoidy_matecocido/icons/spotify-linux-128-CROPPED-118.png env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/spotify_spotify.desktop /snap/bin/spotify %U
 Terminal=false
 MimeType=x-scheme-handler/spotify;
 Categories=Audio;Music;Player;AudioVideo;
