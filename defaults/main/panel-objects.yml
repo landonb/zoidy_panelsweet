@@ -35,7 +35,13 @@ zoidy_matecocido_dubs_vim_launchers:
   - id: "zoidy-dubs-vim-06"
     name: "Edit File with Dubs Vim #06"
     edit: "{{ ansible_env.HOME }}/Documents/zoidy-dubs-vim-06.rst"
-    icon: "{{ ansible_env.HOME }}/.config/zoidy_matecocido/icons/burglarsonarceny.png"
+    # 2020-03-18: As always with icons, you use one as a "test" and it sticks!
+    # - Well, I used Bender's Burglar Arson Arceny as the Vim Alt-tab icon,
+    #   and now I'm annoyed it's used twice, so let's try zoidy for the file
+    #   launcher icon. (Because I'm too lazy to rebuild Vim, or because I'd
+    #   prefer Bender in Alt-tab over Zoidberg?)
+    #  icon: "{{ ansible_env.HOME }}/.config/zoidy_matecocido/icons/burglarsonarceny.png"
+    icon: "{{ ansible_env.HOME }}/.config/zoidy_matecocido/icons/zoidy-uhhhh-128x128.png"
 
   - id: "zoidy-dubs-vim-07"
     name: "Edit File with Dubs Vim #07"
