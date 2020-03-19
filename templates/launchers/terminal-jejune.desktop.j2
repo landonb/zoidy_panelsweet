@@ -7,5 +7,5 @@ Terminal=false
 Icon={{ ansible_env.HOME }}/.config/zoidy_matecocido/icons/terminal_and-mushroom_1139977.png
 Icon[en_US]={{ ansible_env.HOME }}/.config/zoidy_matecocido/icons/terminal_and-mushroom_1139977.png
 Name[en_US]=Termdub [normal ormal ormal]
-Exec={{ ansible_env.HOME }}/.local/bin/bash -c "DUBS_ALWAYS_ON_VISIBLE=false DUBS_STARTIN=$(readlink ~/.waffle/work/user-current-project) mate-terminal {{ zoidy_matecocido_terminal_geometry }} -e {{ ansible_env.HOME }}/.local/bin/bash"
+Exec={{ ansible_env.HOME }}/.local/bin/bash -c "DUBS_ALWAYS_ON_VISIBLE=false HOMEFRIES_CD=$(readlink ~/.waffle/work/user-current-project) mate-terminal {{ zoidy_matecocido_terminal_geometry }} -e {{ ansible_env.HOME }}/.local/bin/bash"
 Name=Termdub [normal ormal ormal]
