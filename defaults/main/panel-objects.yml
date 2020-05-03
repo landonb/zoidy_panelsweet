@@ -82,109 +82,117 @@ zoidy_matecocido_panel_objects:
 
   - object_id: "zoidy-show-desktop"
     launcher_location: "'show-desktop.desktop'"
-    position: "39"
+    position: "37"
 
   - object_id: "zoidy-google-chrome"
     launcher_location: "'/usr/share/applications/google-chrome.desktop'"
-    position: "76"
+    position: "75"
 
   - object_id: "zoidy-chromium"
     launcher_location: "'/usr/share/applications/chromium-browser.desktop'"
-    position: "100"
-
-  - object_id: "zoidy-terminal-raw"
-    launcher_location: "'terminal-raw.desktop'"
-    position: "124"
-
-  - object_id: "zoidy-terminal-vanilla"
-    launcher_location: "'terminal-vanilla.desktop'"
-    position: "148"
+    position: "102"
 
   - object_id: "zoidy-dubs-vim-01"
     launcher_location: "'zoidy-dubs-vim-01.desktop'"
-    position: "172"
-
-  - object_id: "zoidy-terminal-sticky"
-    launcher_location: "'terminal-sticky.desktop'"
-    position: "196"
-
-  - object_id: "zoidy-terminal-jejune"
-    launcher_location: "'terminal-jejune.desktop'"
-    position: "220"
+    position: "129"
 
   - object_id: "zoidy-dubs-vim-02"
     launcher_location: "'zoidy-dubs-vim-02.desktop'"
-    position: "247"
+    position: "156"
+
+  # Raw Terminal
+  # - object_id: "zoidy-terminal-raw"
+  #   launcher_location: "'terminal-raw.desktop'"
+  #   position: "183"
+
+  # Vanilla Terminal
+  - object_id: "zoidy-terminal-vanilla"
+    launcher_location: "'terminal-vanilla.desktop'"
+    position: "183"
+
+  # Termbud [sticky icky icky]
+  - object_id: "zoidy-terminal-sticky"
+    launcher_location: "'terminal-sticky.desktop'"
+    position: "210"
+
+  # Termdub [normal ormal ormal]
+  - object_id: "zoidy-terminal-jejune"
+    launcher_location: "'terminal-jejune.desktop'"
+    position: "237"
 
   - object_id: "zoidy-dubs-vim-03"
     launcher_location: "'zoidy-dubs-vim-03.desktop'"
-    position: "275"
+    position: "267"
 
   - object_id: "zoidy-dubs-vim-04"
     launcher_location: "'zoidy-dubs-vim-04.desktop'"
-    position: "301"
+    position: "296"
 
   - object_id: "zoidy-dubs-vim-05"
     launcher_location: "'zoidy-dubs-vim-05.desktop'"
-    position: "325"
+    position: "323"
 
   - object_id: "zoidy-dubs-vim-06"
     launcher_location: "'zoidy-dubs-vim-06.desktop'"
-    position: "349"
+    position: "350"
 
   - object_id: "zoidy-dubs-vim-07"
     launcher_location: "'zoidy-dubs-vim-07.desktop'"
-    position: "376"
+    position: "377"
 
   - object_id: "zoidy-dubs-vim-08"
     launcher_location: "'zoidy-dubs-vim-08.desktop'"
-    position: "403"
+    position: "393"
 
   - object_id: "zoidy-dubs-vim-09"
     launcher_location: "'zoidy-dubs-vim-09.desktop'"
-    position: "427"
+    position: "431"
 
   - object_id: "zoidy-dubs-vim-10"
     launcher_location: "'zoidy-dubs-vim-10.desktop'"
-    position: "451"
+    position: "458"
 
   - object_id: "launcher-firefox"
     launcher_location: "'/usr/share/applications/firefox.desktop'"
-    position: "475"
+    position: "489"
 
   - object_id: "zoidy-launcher-spotify"
     launcher_location: "'spotify.desktop'"
-    position: "499"
+    position: "516"
 
   - object_id: "zoidy-launcher-clementine"
     launcher_location: "'/usr/share/applications/clementine.desktop'"
-    position: "523"
+    position: "543"
 
   - object_id: "zoidy-launcher-digikam"
     launcher_location: "'digikam.desktop'"
-    position: "547"
+    position: "570"
 
   - object_id: "zoidy-launcher-meld"
     launcher_location: "'meld.desktop'"
-    position: "571"
+    position: "597"
 
   - object_id: "zoidy-launcher-virtualbox"
     launcher_location: "'virtualbox.desktop'"
-    position: "595"
-
-  - object_id: "zoidy-launcher-wireshark"
-    launcher_location: "'/usr/share/applications/wireshark.desktop'"
-    position: "619"
-
-  - object_id: "zoidy-launcher-gimp"
-    launcher_location: "'/usr/share/applications/gimp.desktop'"
-    position: "643"
+    position: "624"
 
   - object_id: "zoidy-launcher-dia"
     launcher_location: "'/usr/share/applications/dia.desktop'"
-    position: "667"
+    position: "651"
+
+  - object_id: "zoidy-launcher-wireshark"
+    launcher_location: "'/usr/share/applications/wireshark.desktop'"
+    position: "678"
+
+  - object_id: "zoidy-launcher-gimp"
+    launcher_location: "'/usr/share/applications/gimp.desktop'"
+    position: "705"
+
+  - object_id: "zoidy-launcher-gnucash"
+    launcher_location: "'gnucash.desktop'"
+    position: "732"
 
   - object_id: "zoidy-launcher-screenshot"
     launcher_location: "'/usr/share/applications/mate-screenshot.desktop'"
-    position: "691"
+    position: "759"
 
