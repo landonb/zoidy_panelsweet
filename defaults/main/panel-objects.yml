@@ -184,15 +184,19 @@ zoidy_matecocido_panel_objects:
     launcher_location: "'/usr/share/applications/wireshark.desktop'"
     position: "678"
 
+  - object_id: "zoidy-launcher-slack"
+    launcher_location: "'/usr/share/applications/slack.desktop'"
+    position: "705"
+
   - object_id: "zoidy-launcher-gimp"
     launcher_location: "'/usr/share/applications/gimp.desktop'"
-    position: "705"
+    position: "732"
 
   - object_id: "zoidy-launcher-gnucash"
     launcher_location: "'gnucash.desktop'"
-    position: "732"
+    position: "759"
 
   - object_id: "zoidy-launcher-screenshot"
     launcher_location: "'/usr/share/applications/mate-screenshot.desktop'"
-    position: "759"
+    position: "786"
 
