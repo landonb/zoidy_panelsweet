@@ -188,12 +188,12 @@ zoidy_matecocido_panel_objects:
     launcher_location: "'/usr/share/applications/slack.desktop'"
     position: "705"
 
-  - object_id: "zoidy-launcher-gimp"
-    launcher_location: "'/usr/share/applications/gimp.desktop'"
-    position: "732"
-
   - object_id: "zoidy-launcher-gnucash"
     launcher_location: "'gnucash.desktop'"
+    position: "732"
+
+  - object_id: "zoidy-launcher-gimp"
+    launcher_location: "'/usr/share/applications/gimp.desktop'"
     position: "759"
 
   - object_id: "zoidy-launcher-screenshot"
