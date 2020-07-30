@@ -193,7 +193,9 @@ zoidy_matecocido_panel_objects:
     position: "732"
 
   - object_id: "zoidy-launcher-gimp"
-    launcher_location: "'/usr/share/applications/gimp.desktop'"
+    # 2020-07-29: flatpak-installed Gimp (v2.10):
+    #  launcher_location: "'/usr/share/applications/gimp.desktop'"
+    launcher-location: "'/var/lib/flatpak/exports/share/applications/org.gimp.GIMP.desktop'"
     position: "759"
 
   - object_id: "zoidy-launcher-screenshot"
