@@ -3,27 +3,27 @@
 # ***
 
 - name: Reset Existing MATE Panel DConf, and Clear ~/.config/mate/panel2.d/default/launchers/
-  shell: dconf reset -f /org/mate/panel/
+  ansible.builtin.shell: dconf reset -f /org/mate/panel/
 
 - name: Kill Off MATE Panel While We Work
-  shell: killall -s 9 mate-panel
+  ansible.builtin.shell: killall -s 9 mate-panel
 
 # ***
 
 # dconf-reset will also perform equivalent of:
 #
 - name: Clear Existing MATE Panel Launcher Files
-  file:
+  ansible.builtin.file:
     state: absent
     path: "{{ ansible_env.HOME }}/.config/mate/panel2.d/default/launchers/"
 
 - name: Ensure MATE Panel Launcher Directory Exists
-  file:
+  ansible.builtin.file:
     state: directory
     path: "{{ ansible_env.HOME }}/.config/mate/panel2.d/default/launchers/"
 
 - name: Deploy Most MATE Panel Launchers
-  template:
+  ansible.builtin.template:
     src: "{{ item }}"
     dest:
       "{{ ansible_env.HOME }}/.config/mate/panel2.d/default/launchers/{{
@@ -33,7 +33,7 @@
     - ../templates/launchers/*.desktop*
 
 - name: Deploy Dubs Vim Edit MATE Panel Launchers \#s 1-10
-  template:
+  ansible.builtin.template:
     src: ../templates/dubs-vim.desktop.j2
     dest: "{{ ansible_env.HOME }}/.config/mate/panel2.d/default/launchers/{{ item.id }}.desktop"
   vars:
@@ -45,18 +45,18 @@
 # ***
 
 - name: Deploy (Synchronize) MATE Panel Launcher Icons
-  synchronize:
+  ansible.builtin.synchronize:
     src: "../files/launcher-icons/"
     dest: "{{ ansible_env.HOME }}/.config/zoidy_matecocido/icons/"
     delete: yes
 
 # ***
 
-- set_fact:
+- ansible.builtin.set_fact:
     list_sep: "', '"
 
 - name: Format custom panel object IDs list
-  set_fact:
+  ansible.builtin.set_fact:
     custom_object_ids: ", '{{ zoidy_matecocido_panel_objects | map(attribute='object_id') | join(list_sep) }}'"
 
 # BEWARE: If you specify a position that causes overlap, mate-panel crashes.
@@ -81,13 +81,13 @@
 # and move it rightward, so that its position is the same value that
 # crashed mate-panel. Oh, well.
 - name: Format default panel DConf, including custom object IDs
-  set_fact:
+  ansible.builtin.set_fact:
     org_mate_panel_dconf: "{{ lookup('template', 'templates/org-mate-panel.dconf.j2') }}"
 
 # ***
 
 - name: Generate custom panel sections
-  shell: |
+  ansible.builtin.shell: |
     echo "[objects/{{ item.object_id }}]
     toplevel-id='bottom'
     object-type='launcher'
@@ -103,13 +103,13 @@
     index_var: index
 
 - name: Format custom MATE panel DConf parts
-  set_fact:
+  ansible.builtin.set_fact:
     dconf_launcher_objects: "{{ dconf_launcher_cmds.results | map(attribute='stdout') | join('\n') }}"
 
 # ***
 
 - name: Load Custom MATE Panel DConf
-  shell: dconf load /org/mate/panel/
+  ansible.builtin.shell: dconf load /org/mate/panel/
   args:
     stdin: "{{ org_mate_panel_dconf + dconf_launcher_objects }}"
 
@@ -117,7 +117,7 @@
 # to work -- you'd see it sort of update after fiddling with dconf, above --
 # and they a final poke-restart sometimes work, e.g.,
 #   - name: Kill-to-Restart mate-panel, to reload window-list
-#     shell: sleep 5.0 ; killall -s SIGUSR1 mate-panel
+#     ansible.builtin.shell: sleep 5.0 ; killall -s SIGUSR1 mate-panel
 # but after running the task a few times, mate-panel would just end up
 # dead, and restarting it wouldn't work well, and then you'd have to logoff
 # and log back on, and then if you ran the task just once, it'd usually work.
@@ -128,9 +128,10 @@
 # already-open terminals you have.
 
 - name: Restart mate-panel and hope that all is well
-  shell: mate-panel &
+  ansible.builtin.shell: mate-panel &
 
 # HOT-TIP/2020-03-01: I ran this task but the panel was not started -- indeed
 # there were no panels whatsoever until I ran `mate-panel &` from the terminal.
-- debug: msg="NOTE! You may need to run `mate-panel &` if the panel did not restart."
+- ansible.builtin.debug:
+    msg: "CHORE: You may need to run `mate-panel &` if the panel did not restart"
 

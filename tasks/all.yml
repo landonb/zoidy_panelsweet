@@ -1,7 +1,7 @@
 ---
 
 - name: Configure and Customize mate-panels
-  include_role:
+  ansible.builtin.include_role:
     name: zoidy_panelsweet
     tasks_from: panels-awesome
     apply:

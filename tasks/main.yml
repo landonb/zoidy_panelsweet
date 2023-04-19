@@ -2,7 +2,7 @@
 # Main task: Load package installers, or not, based on tags.
 
 - name: Load tasks dispatcher for ‘zoidy_panelsweet’
-  include_role:
+  ansible.builtin.include_role:
     name: zoidy_panelsweet
     tasks_from: all
   tags:
