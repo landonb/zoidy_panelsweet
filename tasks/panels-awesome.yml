@@ -2,6 +2,8 @@
 
 # ***
 
+# CPYST:
+#   dconf dump /org/mate/panel/
 - name: Reset Existing MATE Panel DConf, and Clear ~/.config/mate/panel2.d/default/launchers/
   ansible.builtin.shell: dconf reset -f /org/mate/panel/
 
@@ -10,13 +12,15 @@
 
 # ***
 
-# dconf-reset will also perform equivalent of:
-#
+# E.g.,:
+#   /bin/rm -rf ~/.config/mate/panel2.d/default/launchers/
 - name: Clear Existing MATE Panel Launcher Files
   ansible.builtin.file:
     state: absent
     path: "{{ ansible_env.HOME }}/.config/mate/panel2.d/default/launchers/"
 
+# CPYST:
+#   ll ~/.config/mate/panel2.d/default/launchers/
 - name: Ensure MATE Panel Launcher Directory Exists
   ansible.builtin.file:
     state: directory
@@ -44,6 +48,8 @@
 
 # ***
 
+# CPYST:
+#   ll ~/.config/zoidy_matecocido/icons/
 - name: Deploy (Synchronize) MATE Panel Launcher Icons
   ansible.builtin.synchronize:
     src: "../files/launcher-icons/"
@@ -64,7 +70,7 @@
 # E.g., the following config
 #
 #   [objects/notification-area]
-#   #position=1382
+#   # position=1382
 #   position=1409
 #   ...
 #
@@ -96,7 +102,11 @@
     locked=true
     panel-right-stick=false
     "
-    #position={{ 36 + (index > 1 and 35 or 0) + (index > 2 and (31 * (index - 2)) or 0) }}
+    # position={{ 36 + (index > 1 and 35 or 0) + (index > 2 and (31 * (index - 2)) or 0) }}
+  # 2023-04-22: Some launchers in Mint 21.1 (Firefox, mate-terminal, caja) include menu-path:
+  #   menu-path='applications:/'
+  # 2023-04-22: Default Mint 21.1 shows only 'panel-right-stick=true' usage.
+  # - I.e., defaults false, so don't need to specify.
   register: dconf_launcher_cmds
   loop: "{{ zoidy_matecocido_panel_objects }}"
   loop_control:
