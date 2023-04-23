@@ -1,6 +1,6 @@
 # vim:ft=dosini
 [general]
-object-id-list=['window-list', 'menu-bar', 'notification-area', 'zoidy-workspace-switcher', 'zoidy-mate-weather', 'zoidy-multi-load', 'clock'{{ custom_object_ids }}]
+object-id-list=['window-list', 'menu-bar', 'notification-area', 'xapp-status', 'zoidy-workspace-switcher', 'separator', 'zoidy-mate-weather', 'zoidy-multi-load', 'clock'{{ custom_object_ids }}]
 toplevel-id-list=['bottom', 'toplevel-0']
 
 [objects/clock]
@@ -30,12 +30,27 @@ panel-right-stick=true
 position=60
 toplevel-id='bottom'
 
+[objects/separator]
+locked=true
+object-type='separator'
+panel-right-stick=true
+position=30
+toplevel-id='bottom'
+
 [objects/window-list]
 applet-iid='WnckletFactory::WindowListApplet'
 locked=true
 object-type='applet'
 position=0
 toplevel-id='toplevel-0'
+
+[objects/xapp-status]
+applet-iid='MateXAppStatusAppletFactory::MateXAppStatusApplet'
+locked=true
+object-type='applet'
+panel-right-stick=true
+position=50
+toplevel-id='bottom'
 
 [objects/zoidy-mate-weather]
 applet-iid='MateWeatherAppletFactory::MateWeatherApplet'
