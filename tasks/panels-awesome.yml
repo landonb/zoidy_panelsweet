@@ -7,7 +7,7 @@
 - name: Reset Existing MATE Panel DConf, and Clear ~/.config/mate/panel2.d/default/launchers/
   ansible.builtin.shell: dconf reset -f /org/mate/panel/
 
-- name: Kill Off MATE Panel While We Work
+- name: Kill Off MATE Panel While We Work — Restarts it with default launchers
   ansible.builtin.shell: killall -s 9 mate-panel
 
 # ***
@@ -123,25 +123,6 @@
   args:
     stdin: "{{ org_mate_panel_dconf + dconf_launcher_objects }}"
 
-# [lb]: I had issues with letting mate-panel react to dconf changes. It seemed
-# to work -- you'd see it sort of update after fiddling with dconf, above --
-# and they a final poke-restart sometimes work, e.g.,
-#   - name: Kill-to-Restart mate-panel, to reload window-list
-#     ansible.builtin.shell: sleep 5.0 ; killall -s SIGUSR1 mate-panel
-# but after running the task a few times, mate-panel would just end up
-# dead, and restarting it wouldn't work well, and then you'd have to logoff
-# and log back on, and then if you ran the task just once, it'd usually work.
-# So now the workflow is to kill mate-panel, do the work, and then restart it.
-# BEWARE: If you're running this task on the locally machine, you'll lose your
-# mouse connection to MATE until the panel is restarted, e.g., you won't be
-# able to access the menu or any launchers; what you can do is alt-tab to any
-# already-open terminals you have.
-
-- name: Restart mate-panel and hope that all is well
-  ansible.builtin.shell: mate-panel &
-
-# HOT-TIP/2020-03-01: I ran this task but the panel was not started -- indeed
-# there were no panels whatsoever until I ran `mate-panel &` from the terminal.
-- ansible.builtin.debug:
-    msg: "CHORE: You may need to run `mate-panel &` if the panel did not restart"
+- name: One last kill mate-panel — Restart mate-panel so it renders correctly
+  ansible.builtin.shell: killall -s 9 mate-panel
 
