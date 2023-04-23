@@ -3,30 +3,17 @@
 object-id-list=['window-list', 'menu-bar', 'notification-area', 'zoidy-workspace-switcher', 'zoidy-mate-weather', 'zoidy-multi-load', 'clock'{{ custom_object_ids }}]
 toplevel-id-list=['bottom', 'toplevel-0']
 
-[toplevels/bottom]
-expand=true
-orientation='bottom'
-screen=0
-size=27
-y=1053
-y-bottom=0
-
-[toplevels/toplevel-0]
-expand=true
-monitor=0
-orientation='bottom'
-screen=0
-size=44
-x-centered=true
-y=1036
-y-bottom=0
-
-[objects/window-list]
-applet-iid='WnckletFactory::WindowListApplet'
+[objects/clock]
+applet-iid='ClockAppletFactory::ClockApplet'
 locked=true
 object-type='applet'
+panel-right-stick=true
 position=0
-toplevel-id='toplevel-0'
+toplevel-id='bottom'
+
+[objects/clock/prefs]
+custom-format=''
+format='24-hour'
 
 [objects/menu-bar]
 applet-iid='MintMenuAppletFactory::MintMenuApplet'
@@ -43,13 +30,12 @@ panel-right-stick=false
 position=1271
 toplevel-id='bottom'
 
-[objects/zoidy-workspace-switcher]
-applet-iid='WnckletFactory::WorkspaceSwitcherApplet'
+[objects/window-list]
+applet-iid='WnckletFactory::WindowListApplet'
 locked=true
 object-type='applet'
-panel-right-stick=false
-position=1505
-toplevel-id='bottom'
+position=0
+toplevel-id='toplevel-0'
 
 [objects/zoidy-mate-weather]
 applet-iid='MateWeatherAppletFactory::MateWeatherApplet'
@@ -78,15 +64,29 @@ toplevel-id='bottom'
 [objects/zoidy-multi-load/prefs]
 view-memload=false
 
-[objects/clock]
-applet-iid='ClockAppletFactory::ClockApplet'
+[objects/zoidy-workspace-switcher]
+applet-iid='WnckletFactory::WorkspaceSwitcherApplet'
 locked=true
 object-type='applet'
-panel-right-stick=true
-position=0
+panel-right-stick=false
+position=1505
 toplevel-id='bottom'
 
-[objects/clock/prefs]
-custom-format=''
-format='24-hour'
+[toplevels/bottom]
+expand=true
+orientation='bottom'
+screen=0
+size=27
+y=1053
+y-bottom=0
+
+[toplevels/toplevel-0]
+expand=true
+monitor=0
+orientation='bottom'
+screen=0
+size=44
+x-centered=true
+y=1036
+y-bottom=0
 
