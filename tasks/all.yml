@@ -6,6 +6,11 @@
     tasks_from: panels-awesome
     apply:
       tags:
+        - zoidy_panelsweet
+        #
         - panels-awesome
-  tags: panels-awesome
+  tags:
+    - zoidy_panelsweet
+    #
+    - panels-awesome
 
