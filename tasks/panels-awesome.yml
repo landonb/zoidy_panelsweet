@@ -102,7 +102,7 @@
     locked=true
     panel-right-stick=false
     "
-    # position={{ 36 + (index > 1 and 35 or 0) + (index > 2 and (31 * (index - 2)) or 0) }}
+  # position={{ 36 + (index > 1 and 35 or 0) + (index > 2 and (31 * (index - 2)) or 0) }}
   # 2023-04-22: Some launchers in Mint 21.1 (Firefox, mate-terminal, caja) include menu-path:
   #   menu-path='applications:/'
   # 2023-04-22: Default Mint 21.1 shows only 'panel-right-stick=true' usage.
