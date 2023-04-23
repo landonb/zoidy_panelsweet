@@ -1,6 +1,6 @@
 # vim:ft=dosini
 [general]
-object-id-list=['window-list', 'menu-bar', 'notification-area', 'xapp-status', 'zoidy-workspace-switcher', 'separator', 'zoidy-mate-weather', 'zoidy-multi-load', 'clock'{{ custom_object_ids }}]
+object-id-list=['window-list', 'menu-bar', 'notification-area', 'xapp-status', 'zoidy-workspace-switcher', 'separator-1', 'zoidy-mate-weather', 'separator-2', 'zoidy-multi-load', 'clock'{{ custom_object_ids }}]
 toplevel-id-list=['bottom', 'toplevel-0']
 
 [objects/clock]
@@ -27,14 +27,21 @@ applet-iid='NotificationAreaAppletFactory::NotificationArea'
 locked=true
 object-type='applet'
 panel-right-stick=true
-position=60
+position=40
 toplevel-id='bottom'
 
-[objects/separator]
+[objects/separator-1]
 locked=true
 object-type='separator'
 panel-right-stick=true
-position=30
+position=21
+toplevel-id='bottom'
+
+[objects/separator-2]
+locked=true
+object-type='separator'
+panel-right-stick=true
+position=19
 toplevel-id='bottom'
 
 [objects/window-list]
@@ -49,7 +56,7 @@ applet-iid='MateXAppStatusAppletFactory::MateXAppStatusApplet'
 locked=true
 object-type='applet'
 panel-right-stick=true
-position=50
+position=39
 toplevel-id='bottom'
 
 [objects/zoidy-mate-weather]
@@ -84,7 +91,7 @@ applet-iid='WnckletFactory::WorkspaceSwitcherApplet'
 locked=true
 object-type='applet'
 panel-right-stick=true
-position=40
+position=30
 toplevel-id='bottom'
 
 [toplevels/bottom]
