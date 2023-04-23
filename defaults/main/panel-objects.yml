@@ -95,11 +95,13 @@ zoidy_matecocido_panel_objects:
     # position: "102"
     position: "3"
 
+  # Yellow cheese wedge.
   - object_id: "zoidy-dubs-vim-01"
     launcher_location: "'zoidy-dubs-vim-01.desktop'"
     # position: "129"
     position: "4"
 
+  # Mouse spotlight.
   - object_id: "zoidy-dubs-vim-02"
     launcher_location: "'zoidy-dubs-vim-02.desktop'"
     # position: "156"
@@ -129,41 +131,49 @@ zoidy_matecocido_panel_objects:
     # position: "237"
     position: "9"
 
+  # Lucy. "Do it, Do it, Do it."
   - object_id: "zoidy-dubs-vim-03"
     launcher_location: "'zoidy-dubs-vim-03.desktop'"
     # position: "267"
     position: "10"
 
+  # Erlenmeyer.
   - object_id: "zoidy-dubs-vim-04"
     launcher_location: "'zoidy-dubs-vim-04.desktop'"
     # position: "296"
     position: "11"
 
+  # Barrel.
   - object_id: "zoidy-dubs-vim-05"
     launcher_location: "'zoidy-dubs-vim-05.desktop'"
     # position: "323"
     position: "12"
 
+  # Burglar Bender.
   - object_id: "zoidy-dubs-vim-06"
     launcher_location: "'zoidy-dubs-vim-06.desktop'"
     # position: "350"
     position: "13"
 
+  # Lime pair.
   - object_id: "zoidy-dubs-vim-07"
     launcher_location: "'zoidy-dubs-vim-07.desktop'"
     # position: "377"
     position: "14"
 
+  # Bright lemon.
   - object_id: "zoidy-dubs-vim-08"
     launcher_location: "'zoidy-dubs-vim-08.desktop'"
     # position: "393"
     position: "15"
 
+  # Plastic water bottle.
   - object_id: "zoidy-dubs-vim-09"
     launcher_location: "'zoidy-dubs-vim-09.desktop'"
     # position: "431"
     position: "16"
 
+  # Iced drink.
   - object_id: "zoidy-dubs-vim-10"
     launcher_location: "'zoidy-dubs-vim-10.desktop'"
     # position: "458"
