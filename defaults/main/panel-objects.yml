@@ -207,9 +207,14 @@ zoidy_matecocido_panel_objects:
     position: "26"
 
   - object_id: "zoidy-launcher-gimp"
-    # 2020-07-29: flatpak-installed Gimp (v2.10):
+    # 2020-07-29: Distro Gimp:
     #  launcher_location: "'/usr/share/applications/gimp.desktop'"
-    launcher_location: "'/var/lib/flatpak/exports/share/applications/org.gimp.GIMP.desktop'"
+    # 2020-07-29: System-wide Flatpak Gimp:
+    #  launcher_location: "'/var/lib/flatpak/exports/share/applications/org.gimp.GIMP.desktop'"
+    # SAVVY/2023-04-23: Expects gimp-2.10 found, which you can put at ~/.local/bin/gimp-2.10.
+    # - CXREF: ~/.kit/ansible/roles/zoidy_mintyfresh/tasks/install-flatpaks.yml
+    launcher_location: "'{{ ansible_env.HOME }}/.local/share/flatpak/app/org.gimp.GIMP/current/active/files/share/applications/org.gimp.GIMP.desktop'"
+    position: "27"
 
   - object_id: "zoidy-launcher-virtualbox"
     launcher_location: "'virtualbox.desktop'"
