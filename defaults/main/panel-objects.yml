@@ -220,7 +220,11 @@ zoidy_matecocido_panel_objects:
     launcher_location: "'virtualbox.desktop'"
     position: "28"
 
-  - object_id: "zoidy-launcher-screenshot"
-    launcher_location: "'/usr/share/applications/mate-screenshot.desktop'"
+  - object_id: "zoidy-launcher-mate-display-properties"
+    launcher_location: "'/usr/share/applications/mate-display-properties.desktop'"
     position: "29"
+
+  - object_id: "zoidy-launcher-mate-screenshot"
+    launcher_location: "'/usr/share/applications/mate-screenshot.desktop'"
+    position: "30"
 
