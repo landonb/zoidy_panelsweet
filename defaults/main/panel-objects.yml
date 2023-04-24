@@ -82,17 +82,14 @@ zoidy_matecocido_panel_objects:
 
   - object_id: "zoidy-show-desktop"
     launcher_location: "'show-desktop.desktop'"
-    # position: "37"
     position: "1"
 
   - object_id: "zoidy-google-chrome"
     launcher_location: "'/usr/share/applications/google-chrome.desktop'"
-    # position: "75"
     position: "2"
 
   - object_id: "zoidy-chromium"
     launcher_location: "'/usr/share/applications/chromium-browser.desktop'"
-    # position: "102"
     position: "3"
 
   # ISOFF/2023-04-22: Deprecating Vim launchers, in favor of global
@@ -103,37 +100,31 @@ zoidy_matecocido_panel_objects:
   # Yellow cheese wedge.
   - object_id: "zoidy-dubs-vim-01"
     launcher_location: "'zoidy-dubs-vim-01.desktop'"
-    # position: "129"
     position: "4"
   #
   # # Mouse spotlight.
   # - object_id: "zoidy-dubs-vim-02"
   #   launcher_location: "'zoidy-dubs-vim-02.desktop'"
-  #   # position: "156"
   #   position: "5"
 
   # Raw Terminal
   # - object_id: "zoidy-terminal-raw"
   #   launcher_location: "'terminal-raw.desktop'"
-  #   # position: "183"
   #   position: "6"
 
   # Vanilla Terminal
   - object_id: "zoidy-terminal-vanilla"
     launcher_location: "'terminal-vanilla.desktop'"
-    # position: "183"
     position: "7"
 
   # Termbud [sticky icky icky]
   - object_id: "zoidy-terminal-sticky"
     launcher_location: "'terminal-sticky.desktop'"
-    # position: "210"
     position: "8"
 
   # Termdub [normal ormal ormal]
   - object_id: "zoidy-terminal-jejune"
     launcher_location: "'terminal-jejune.desktop'"
-    # position: "237"
     position: "9"
 
   # ISOFF/2023-04-22: Deprecating Vim launchers, in favor of global
@@ -142,110 +133,90 @@ zoidy_matecocido_panel_objects:
   # # Lucy. "Do it, Do it, Do it."
   # - object_id: "zoidy-dubs-vim-03"
   #   launcher_location: "'zoidy-dubs-vim-03.desktop'"
-  #   # position: "267"
   #   position: "10"
   #
   # # Erlenmeyer.
   # - object_id: "zoidy-dubs-vim-04"
   #   launcher_location: "'zoidy-dubs-vim-04.desktop'"
-  #   # position: "296"
   #   position: "11"
   #
   # # Barrel.
   # - object_id: "zoidy-dubs-vim-05"
   #   launcher_location: "'zoidy-dubs-vim-05.desktop'"
-  #   # position: "323"
   #   position: "12"
   #
   # # Burglar Bender.
   # - object_id: "zoidy-dubs-vim-06"
   #   launcher_location: "'zoidy-dubs-vim-06.desktop'"
-  #   # position: "350"
   #   position: "13"
   #
   # # Lime pair.
   # - object_id: "zoidy-dubs-vim-07"
   #   launcher_location: "'zoidy-dubs-vim-07.desktop'"
-  #   # position: "377"
   #   position: "14"
   #
   # # Bright lemon.
   # - object_id: "zoidy-dubs-vim-08"
   #   launcher_location: "'zoidy-dubs-vim-08.desktop'"
-  #   # position: "393"
   #   position: "15"
   #
   # # Plastic water bottle.
   # - object_id: "zoidy-dubs-vim-09"
   #   launcher_location: "'zoidy-dubs-vim-09.desktop'"
-  #   # position: "431"
   #   position: "16"
   #
   # # Iced drink.
   # - object_id: "zoidy-dubs-vim-10"
   #   launcher_location: "'zoidy-dubs-vim-10.desktop'"
-  #   # position: "458"
   #   position: "17"
 
   - object_id: "launcher-firefox"
     launcher_location: "'/usr/share/applications/firefox.desktop'"
-    # position: "489"
     position: "18"
 
   - object_id: "zoidy-launcher-spotify"
     launcher_location: "'spotify.desktop'"
-    # position: "516"
     position: "19"
 
   - object_id: "zoidy-launcher-clementine"
     launcher_location: "'/usr/share/applications/clementine.desktop'"
-    # position: "543"
     position: "20"
 
   - object_id: "zoidy-launcher-digikam"
     launcher_location: "'digikam.desktop'"
-    # position: "570"
     position: "21"
 
   - object_id: "zoidy-launcher-meld"
     launcher_location: "'meld.desktop'"
-    # position: "597"
     position: "22"
 
   - object_id: "zoidy-launcher-virtualbox"
     launcher_location: "'virtualbox.desktop'"
-    # position: "624"
     position: "23"
 
   - object_id: "zoidy-launcher-dia"
     launcher_location: "'/usr/share/applications/dia.desktop'"
-    # position: "624"
     position: "24"
 
   - object_id: "zoidy-launcher-wireshark"
     launcher_location: "'/usr/share/applications/wireshark.desktop'"
-    # position: "678"
     position: "25"
 
   - object_id: "zoidy-launcher-slack"
     launcher_location: "'/usr/share/applications/slack.desktop'"
-    # position: "705"
     position: "26"
 
   - object_id: "zoidy-launcher-gnucash"
     launcher_location: "'gnucash.desktop'"
-    # position: "732"
     position: "27"
 
   - object_id: "zoidy-launcher-gimp"
     # 2020-07-29: flatpak-installed Gimp (v2.10):
     #  launcher_location: "'/usr/share/applications/gimp.desktop'"
     launcher_location: "'/var/lib/flatpak/exports/share/applications/org.gimp.GIMP.desktop'"
-    # position: "759"
     position: "28"
 
   - object_id: "zoidy-launcher-screenshot"
     launcher_location: "'/usr/share/applications/mate-screenshot.desktop'"
-    # position: "786"
     position: "29"
 
