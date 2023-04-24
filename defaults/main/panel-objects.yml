@@ -190,30 +190,29 @@ zoidy_matecocido_panel_objects:
     launcher_location: "'meld.desktop'"
     position: "22"
 
-  - object_id: "zoidy-launcher-virtualbox"
-    launcher_location: "'virtualbox.desktop'"
-    position: "23"
-
   - object_id: "zoidy-launcher-dia"
     launcher_location: "'/usr/share/applications/dia.desktop'"
-    position: "24"
+    position: "23"
 
   - object_id: "zoidy-launcher-wireshark"
     launcher_location: "'/usr/share/applications/wireshark.desktop'"
-    position: "25"
+    position: "24"
 
   - object_id: "zoidy-launcher-slack"
     launcher_location: "'/usr/share/applications/slack.desktop'"
-    position: "26"
+    position: "25"
 
   - object_id: "zoidy-launcher-gnucash"
     launcher_location: "'gnucash.desktop'"
-    position: "27"
+    position: "26"
 
   - object_id: "zoidy-launcher-gimp"
     # 2020-07-29: flatpak-installed Gimp (v2.10):
     #  launcher_location: "'/usr/share/applications/gimp.desktop'"
     launcher_location: "'/var/lib/flatpak/exports/share/applications/org.gimp.GIMP.desktop'"
+
+  - object_id: "zoidy-launcher-virtualbox"
+    launcher_location: "'virtualbox.desktop'"
     position: "28"
 
   - object_id: "zoidy-launcher-screenshot"
