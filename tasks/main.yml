@@ -6,7 +6,5 @@
     name: zoidy_panelsweet
     tasks_from: all
   tags:
-    - zoidy_panelsweet
-    #
     - panels-awesome
 
