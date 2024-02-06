@@ -2,6 +2,21 @@
 
 # ***
 
+# Ensure ~/.local/bin/bash exists, which some panel launchers use rather
+# than, e.g., /bin/bash. This is useful if you want to use a custom Bash.
+- name: Stat ~/.local/bin/bash
+  ansible.builtin.stat: path="{{ ansible_env.HOME }}/.local/bin/bash"
+  register: local_bin_bash_f
+
+- name: Symlink ~/.local/bin/bash if not exists
+  ansible.builtin.file:
+    src: "/bin/bash"
+    dest: "{{ ansible_env.HOME }}/.local/bin/bash"
+    state: link
+  when: not local_bin_bash_f.stat.exists
+
+# ***
+
 # CPYST:
 #   dconf dump /org/mate/panel/
 - name: Reset Existing MATE Panel DConf, and Clear ~/.config/mate/panel2.d/default/launchers/
