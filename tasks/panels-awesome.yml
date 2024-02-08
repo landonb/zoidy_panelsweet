@@ -145,6 +145,21 @@
 
 # ***
 
+# Remove the ⋮ three vertical dots/ellipsis that appear to the left of the window-list
+# and to the left of the notification area.
+# - DUNNO: Oddly, I cannot grab the dots, or do anything with them.
+#   - What's their purpose? Am I missing something?
+# - REFER: https://forums.linuxmint.com/viewtopic.php?t=323799
+
+- name: Hide vertical ellipsis from window-list and from notification area
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_env.HOME }}/.config/gtk-3.0/gtk.css"
+    line: 'MatePanelAppletFrameDBus > MatePanelAppletFrameDBus { background: none; }'
+    regexp: '^MatePanelAppletFrameDBus > MatePanelAppletFrameDBus { background: none; }$'
+    create: true
+
+# ***
+
 - name: One last kill mate-panel — Restart mate-panel so it renders correctly
   ansible.builtin.shell: killall -s 9 mate-panel
 
