@@ -29,7 +29,7 @@ Icon[en_US]=spotify
 #   - If you're curious about BAMF_DESKTOP_FILE_HINT, you'll find it at & in:
 #       https://lazka.github.io/pgi-docs/Bamf-3/index.html
 #         src/bamf-matcher.c
-Exec={{ ansible_env.HOME }}/.local/bin/kdocker -q -i {{ ansible_env.HOME }}/.config/zoidy_matecocido/icons/spotify-linux-128-CROPPED-118.png env BAMF_DESKTOP_FILE_HINT=/usr/share/spotify/spotify.desktop /usr/bin/spotify %U
+Exec=/usr/bin/kdocker -q -i {{ ansible_env.HOME }}/.config/zoidy_matecocido/icons/spotify-linux-128-CROPPED-118.png env BAMF_DESKTOP_FILE_HINT=/usr/share/spotify/spotify.desktop /usr/bin/spotify %U
 Terminal=false
 MimeType=x-scheme-handler/spotify;
 Categories=Audio;Music;Player;AudioVideo;
