@@ -178,9 +178,14 @@ zoidy_matecocido_panel_objects:
     launcher_location: "'spotify.desktop'"
     position: "19"
 
-  - object_id: "zoidy-launcher-clementine"
-    launcher_location: "'/usr/share/applications/clementine.desktop'"
-    position: "20"
+  # ISOFF/2024-02-06: I rarely (never) use this app, and its icon
+  # is the largest, brightest one in the row, which always catches
+  # my eye. (ALTLY: Tone down the icon and keep the launcher; until
+  # then, *buh bye*.)
+  #
+  # - object_id: "zoidy-launcher-clementine"
+  #   launcher_location: "'/usr/share/applications/clementine.desktop'"
+  #   position: "20"
 
   - object_id: "zoidy-launcher-digikam"
     launcher_location: "'digikam.desktop'"
