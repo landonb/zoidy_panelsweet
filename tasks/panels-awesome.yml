@@ -138,6 +138,13 @@
   args:
     stdin: "{{ org_mate_panel_dconf + dconf_launcher_objects }}"
 
+# ***
+
+- name: Disable window-list "Enable mouse scrolling"
+  ansible.builtin.shell: dconf write /org/mate/panel/objects/window-list/prefs/scroll-enabled false
+
+# ***
+
 - name: One last kill mate-panel — Restart mate-panel so it renders correctly
   ansible.builtin.shell: killall -s 9 mate-panel
 
