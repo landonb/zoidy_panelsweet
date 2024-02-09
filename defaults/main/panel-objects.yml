@@ -200,7 +200,10 @@ zoidy_matecocido_panel_objects:
     position: "23"
 
   - object_id: "zoidy-launcher-wireshark"
-    launcher_location: "'/usr/share/applications/wireshark.desktop'"
+    # DUNNO/2024-02-08: Desktop file I used previously not present on LM 21.3:
+    #   launcher_location: "'/usr/share/applications/wireshark.desktop'"
+    # - But `locate` found the following file instead.
+    launcher_location: "'/usr/share/app-install/desktop/wireshark:wireshark.desktop'"
     position: "24"
 
   - object_id: "zoidy-launcher-slack"
