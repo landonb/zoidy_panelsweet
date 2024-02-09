@@ -207,7 +207,9 @@ zoidy_matecocido_panel_objects:
     position: "24"
 
   - object_id: "zoidy-launcher-slack"
-    launcher_location: "'/usr/share/applications/slack.desktop'"
+    # If installed via `dpkg -i <slack>.deb`:
+    #  launcher_location: "'/usr/share/applications/slack.desktop'"
+    launcher_location: "'{{ ansible_env.HOME }}/.local/share/flatpak/app/com.slack.Slack/current/active/files/share/applications/com.slack.Slack.desktop'"
     position: "25"
 
   - object_id: "zoidy-launcher-gnucash"
