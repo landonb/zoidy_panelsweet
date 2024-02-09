@@ -112,19 +112,19 @@ zoidy_matecocido_panel_objects:
   #   launcher_location: "'terminal-raw.desktop'"
   #   position: "6"
 
-  # Vanilla Terminal
-  - object_id: "zoidy-terminal-vanilla"
-    launcher_location: "'terminal-vanilla.desktop'"
-    position: "7"
-
   # Termdub [normal ormal ormal]
   - object_id: "zoidy-terminal-jejune"
     launcher_location: "'terminal-jejune.desktop'"
-    position: "8"
+    position: "7"
 
   # Termbud [sticky icky icky]
   - object_id: "zoidy-terminal-sticky"
     launcher_location: "'terminal-sticky.desktop'"
+    position: "8"
+
+  # Vanilla Terminal
+  - object_id: "zoidy-terminal-vanilla"
+    launcher_location: "'terminal-vanilla.desktop'"
     position: "9"
 
   # ISOFF/2023-04-22: Deprecating Vim launchers, in favor of global
