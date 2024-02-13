@@ -209,7 +209,10 @@ zoidy_matecocido_panel_objects:
   - object_id: "zoidy-launcher-slack"
     # If installed via `dpkg -i <slack>.deb`:
     #  launcher_location: "'/usr/share/applications/slack.desktop'"
-    launcher_location: "'{{ ansible_env.HOME }}/.local/share/flatpak/app/com.slack.Slack/current/active/files/share/applications/com.slack.Slack.desktop'"
+    # If installed via Flatpak, don't use the included Desktop file,
+    # which uses zypak, which we don't want to use (and is not installed):
+    #  launcher_location: "'{{ ansible_env.HOME }}/.local/share/flatpak/app/com.slack.Slack/current/active/files/share/applications/com.slack.Slack.desktop'"
+    launcher_location: "'slack.desktop'"
     position: "25"
 
   - object_id: "zoidy-launcher-gnucash"
