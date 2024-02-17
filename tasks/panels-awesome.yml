@@ -24,6 +24,7 @@
 
 - name: Kill Off MATE Panel While We Work — Restarts it with default launchers
   ansible.builtin.shell: killall -s 9 mate-panel
+  ignore_errors: yes
 
 # ***
 
@@ -162,4 +163,41 @@
 
 - name: One last kill mate-panel — Restart mate-panel so it renders correctly
   ansible.builtin.shell: killall -s 9 mate-panel
+  ignore_errors: yes
+
+# ***
+
+# SAVVY/2024-02-16: In practice, mate-panel restarts itself, but if you've
+# been fiddling around in the terminal yourself, it might not, in which
+# case you can start it thusly::
+#
+#   mate-panel --replace &
+#
+# DUNNO: I tried (re)starting mate-panel from Ansible, but had no success, e.g.,
+#
+#   - name: Ensure mate-panel starts
+#     # ansible.builtin.shell: mate-panel --replace &
+#     # NO OUTPUT
+#     #
+#     ansible.builtin.shell: mate-panel --replace
+#     # OUTPUT (stderr):
+#     # (mate-panel:2815372): Gtk-WARNING **: 19:34:11.022: cannot open display:
+#     #
+#     # ansible.builtin.shell: startx mate-panel --replace
+#     # HANGS
+#     #
+#
+# - I also tried forwarding X11, but that didn't work (and it makes each Ansible
+#   step run much slower), e.g.,
+#
+#     ANSIBLE_DEBUG=0 ANSIBLE_SSH_ARGS="-o ForwardX11=yes" \
+#       ansible-playbook ~/.zoidy/site.yml -l ${managed_node} --tags zoidy_panelsweet
+#     # Also:
+#     ANSIBLE_DEBUG=0 ANSIBLE_SSH_ARGS='-C -o ForwardX11=yes -o ControlMaster=auto \
+#         -o ControlPersist=60s -o KbdInteractiveAuthentication=no' \
+#       ansible-playbook ~/.zoidy/site.yml -l ${managed_node} --tags zoidy_panelsweet
+#
+# - So if you don't see mate-panel restart, do it manually from a terminal:
+#
+#   mate-panel --replace &
 
