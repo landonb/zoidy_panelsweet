@@ -40,6 +40,15 @@ log() {
   echo "$(date +%Y-%m-%d\ %X) -- ${USER} -- \"$@\"" >> ${logfile}
 }
 
+# The meat of what this daemon does:
+# - Restore the panel arrangement.
+reload_mate_panel_dconf () {
+  cat "${DCONF_DUMP}" \
+    | dconf load ${DCONF_DIR}
+
+  log "restored dconf ${DCONF_DIR}"
+}
+
 # Exit if lock file exists
 if [ -e "${pidfile}" ]; then
   log "$0 already running..."
@@ -54,6 +63,9 @@ log "daemon started..."
 
 # Create lock file with own PID inside
 echo $$ > ${pidfile}
+
+# Restore dconf on initial logon (or whenever this daemon is started)
+reload_mate_panel_dconf
 
 # Usually `dbus-daemon` address can be guessed (`-s` returns 1st PID found)
 # - Pipe to `xargs -0` to suppress message:
@@ -73,11 +85,9 @@ dbus-monitor --address "${DBUS_SESSION_BUS_ADDRESS}" "${expr}" | \
           log "session locked"
           ;;
         *"boolean false"*)
-          # The meat of what this daemon does:
-          # - Restore the panel arrangement.
-          cat "${DCONF_DUMP}" \
-            | dconf load ${DCONF_DIR}
-          log "session unlocked — restored dconf ${DCONF_DIR}"
+          log "session unlocked"
+
+          reload_mate_panel_dconf
           ;;
       esac
     fi
