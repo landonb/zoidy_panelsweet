@@ -201,3 +201,55 @@
 #
 #   mate-panel --replace &
 
+# ***
+
+# Finally, capture the new dconf settings.
+# - KLUGE/2024-02-16: Beginning with latest Linux Mint 21.3 (after upgrading
+#   my laptop from LM 19.3!), sometimes when I logon after locking my desktop,
+#   the window-list panel and the launchers panel swap positions. The easiest
+#   way to recover is to reload the dconf settings, which mate-panel reacts to
+#   immediately. E.g.,
+#
+#     cat ~/.local/share/zoidy_panelsweet/dconf--org-mate-panel.dump \
+#       | dconf load /org/mate/panel/
+
+- name: Ensure MATE Panel dconf dump directory exists
+  ansible.builtin.file:
+    state: directory
+    path: "{{ ansible_env.HOME }}/.local/share/zoidy_panelsweet/"
+
+- name: Capture MATE Panel dconf dump (for mate-panel logon reset kludge)
+  ansible.builtin.shell:
+    dconf dump /org/mate/panel/ \
+      > "{{ ansible_env.HOME }}/.local/share/zoidy_panelsweet/dconf--org-mate-panel.dump"
+
+# Install service to restore mate-panel layout on unlock
+
+- name: "Create the user systemd service unit to restore mate-panel layout"
+  ansible.builtin.template:
+    src: user/restore-mate-panels.service
+    dest: "{{ ansible_env.HOME }}/.config/systemd/user"
+
+- name: "Create the user systemd daemon script to restore mate-panel layout"
+  ansible.builtin.template:
+    src: user/restore-mate-panels.sh
+    dest: "{{ ansible_env.HOME }}/.local/bin"
+    mode: "0755"
+
+# E.g.,
+#   systemctl --user daemon-reload
+#   systemctl --user enable --now restore-mate-panels.service
+- name: "Start the user systemd timer"
+  ansible.builtin.systemd_service:
+    name: restore-mate-panels.service
+    state: started
+    enabled: true
+    scope: user
+    daemon_reload: true
+
+# ***
+
+# CPYST: Run this if mate-panel doesn't restart (as documented above):
+#
+#   mate-panel --replace &
+
