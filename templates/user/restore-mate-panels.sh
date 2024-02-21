@@ -24,6 +24,8 @@ set -o nounset
 pidfile=/tmp/restore-mate-panels.sh.pid
 # Log file path
 logfile=/tmp/restore-mate-panels.sh.log
+# Tmp dump path
+dumpfile=/tmp/restore-mate-panels.dump
 
 # Cleanup trap
 cleanup() {
@@ -43,10 +45,31 @@ log() {
 # The meat of what this daemon does:
 # - Restore the panel arrangement.
 reload_mate_panel_dconf () {
+  dump_mate_panel_dconf
+
   cat "${DCONF_DUMP}" \
     | dconf load ${DCONF_DIR}
 
   log "restored dconf ${DCONF_DIR}"
+
+  if has_changed_mate_panel_dconf; then
+    mate-panel --replace &
+
+    log "replaced mate-panel"
+  fi
+}
+
+dump_mate_panel_dconf () {
+  local suffix="$1"
+
+  dconf dump ${DCONF_DIR} \
+    > "${dumpfile}${suffix}"
+}
+
+has_changed_mate_panel_dconf () {
+  dump_mate_panel_dconf ".after"
+
+  ! diff -q "${dumpfile}" "${dumpfile}.after" > /dev/null
 }
 
 # Exit if lock file exists
