@@ -6,6 +6,16 @@
 #   - *Discover a DBUS Session Deterministically*
 #     https://gist.github.com/naftulikay/f4c229b3c71fff9ac2102a0e03bd756f
 
+# CXREF:
+#   ~/.kit/ansible/roles/zoidy_panelsweet/tasks/panels-awesome.yml
+#   ~/.kit/ansible/roles/zoidy_panelsweet/templates/user/restore-mate-panels.service
+
+# CPYST/2024-02-21: After editing this file, either run the Ansible task:
+#   ANSIBLE_DEBUG=0 ansible-playbook /path/to/site.yml -l $(hostname) --tags zoidy_panelsweet
+# Or update ~/.local/bin and restart the service:
+#   /bin/cp ~/.kit/ansible/roles/zoidy_panelsweet/templates/user/restore-mate-panels.sh ~/.local/bin
+#   systemctl --user restart restore-mate-panels.service
+
 # ***
 
 # The screensaver name, e.g.:
