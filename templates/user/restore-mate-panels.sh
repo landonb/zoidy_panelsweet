@@ -67,7 +67,9 @@ reload_mate_panel_dconf () {
   if has_changed_mate_panel_dconf; then
     mate-panel --replace &
 
-    log "replaced mate-panel"
+    log "✗ replaced mate-panel"
+  else
+    log "✓ dconf unchanged"
   fi
 }
 
