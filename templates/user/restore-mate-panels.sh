@@ -43,6 +43,8 @@ cleanup() {
   rm -f ${pidfile}
   # Reset kernel signal catching
   trap - INT TERM EXIT
+  # "Buy bye"
+  log "daemon stopped"
   # Stop the daemon
   exit
 }
