@@ -34,6 +34,7 @@ set -o nounset
 pidfile=/tmp/restore-mate-panels.sh.pid
 # Log file path
 logfile=/tmp/restore-mate-panels.sh.log
+log_lns=10000
 # Tmp dump path
 dumpfile=/tmp/restore-mate-panels.dump
 
@@ -70,6 +71,11 @@ reload_mate_panel_dconf () {
     log "✗ replaced mate-panel"
   else
     log "✓ dconf unchanged"
+  fi
+
+  # Truncate the log file. Keep the last ${log_lns} lines.
+  if [ ${log_lns} -ge 0 ]; then
+    sed -i "${log_lns},\$ d" "${logfile}"
   fi
 }
 
