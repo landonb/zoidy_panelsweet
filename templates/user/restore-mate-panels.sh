@@ -52,7 +52,7 @@ cleanup() {
 
 # Simple logging mechanism
 log() {
-  echo "$(date +%Y-%m-%d\ %X) -- ${USER} -- \"$@\"" >> ${logfile}
+  echo "$(date +%Y-%m-%d\ %X) -- ${USER} -- \"$@\"" >> "${logfile}"
 }
 
 # The meat of what this daemon does:
