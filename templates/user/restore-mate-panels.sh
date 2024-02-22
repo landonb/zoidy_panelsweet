@@ -60,7 +60,7 @@ reload_mate_panel_dconf () {
 }
 
 dump_mate_panel_dconf () {
-  local suffix="$1"
+  suffix="${1:-}"
 
   dconf dump ${DCONF_DIR} \
     > "${dumpfile}${suffix}"
