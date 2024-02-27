@@ -58,20 +58,23 @@ log() {
 # The meat of what this daemon does:
 # - Restore the panel arrangement.
 reload_mate_panel_dconf () {
-  dump_mate_panel_dconf
-
   cat "${DCONF_DUMP}" \
     | dconf load ${DCONF_DIR}
 
   log "restored dconf ${DCONF_DIR}"
 
   if has_changed_mate_panel_dconf; then
-    mate-panel --replace &
-
     log "✗ replaced mate-panel"
   else
     log "✓ dconf unchanged"
   fi
+
+  # This was originally in the `has_changed_mate_panel_dconf` branch
+  # above, but after using for a few days, that branch never appears to
+  # run. So trying dump_mate_panel_dconf as soon as session is locked,
+  # rather than atop this function; and trying --replace always (here),
+  # rather than in the `has_changed_mate_panel_dconf` if-branch.
+  mate-panel --replace &
 
   # Truncate the log file. Keep the last ${log_lns} lines.
   if [ ${log_lns} -ge 0 ]; then
@@ -126,6 +129,8 @@ dbus-monitor --address "${DBUS_SESSION_BUS_ADDRESS}" "${expr}" | \
       case "${line}" in
         *"boolean true"*)
           log "session locked"
+
+          dump_mate_panel_dconf
           ;;
         *"boolean false"*)
           log "session unlocked"
