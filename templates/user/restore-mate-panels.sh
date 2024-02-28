@@ -123,6 +123,9 @@ expr="type=signal,interface=${SCREENSAVER_ID}"
 
 prev_line=""
 
+log "entering run loop:"
+log "  dbus-monitor --address \"${DBUS_SESSION_BUS_ADDRESS}\" \"${expr}\""
+
 dbus-monitor --address "${DBUS_SESSION_BUS_ADDRESS}" "${expr}" | \
   while read line; do
     if echo "${prev_line}" | grep -q "; member=ActiveChanged$"; then
