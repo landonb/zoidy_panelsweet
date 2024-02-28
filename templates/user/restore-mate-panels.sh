@@ -115,36 +115,62 @@ echo $$ > ${pidfile}
 # Restore dconf on initial logon (or whenever this daemon is started)
 reload_mate_panel_dconf
 
+# Here's what you might see when locking, then unlocking the session.
+# - It's similar to letting the computer idle and the screensaver activating,
+#   in which case you'll see both ActiveChanged lines but not the Lock message.
+#
+# method call time=1709087779.758303 sender=:1.8518 -> destination=org.mate.ScreenSaver
+#   serial=3 path=/org/mate/ScreenSaver; interface=org.mate.ScreenSaver; member=Lock
+# signal time=1709087781.205881 sender=:1.36 -> destination=(null destination) serial=197
+#   path=/org/mate/ScreenSaver; interface=org.mate.ScreenSaver; member=ActiveChanged
+#    boolean true
+# signal time=1709087785.998767 sender=:1.36 -> destination=(null destination) serial=198
+#   path=/org/mate/ScreenSaver; interface=org.mate.ScreenSaver; member=ActiveChanged
+#    boolean false
+
+screen_locked=true
+prev_line=""
+
 # Usually `dbus-daemon` address can be guessed (`-s` returns 1st PID found)
 # - Pipe to `xargs -0` to suppress message:
 #   bash: warning: command substitution: ignored null byte in input
 export $(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$(pidof -s dbus-daemon)/environ | xargs -0)
 
 # DBus watch expression
-expr="type=signal,interface=${SCREENSAVER_ID}"
+expr="type=method_call,interface=${SCREENSAVER_ID} type=signal,interface=${SCREENSAVER_ID}"
 
-prev_line=""
+log "➰ looping: dbus-monitor --address \"${DBUS_SESSION_BUS_ADDRESS}\" ${expr}"
 
-log "entering run loop:"
-log "  dbus-monitor --address \"${DBUS_SESSION_BUS_ADDRESS}\" \"${expr}\""
-
-dbus-monitor --address "${DBUS_SESSION_BUS_ADDRESS}" "${expr}" | \
+dbus-monitor --address "${DBUS_SESSION_BUS_ADDRESS}" ${expr} | \
   while read line; do
-    if echo "${prev_line}" | grep -q "; member=ActiveChanged$"; then
-      case "${line}" in
-        *"boolean true"*)
-          log "session locked"
+    if echo "${line}" | grep -q "; member=Lock$"; then
+      log "session locked"
 
-          dump_mate_panel_dconf
-          ;;
-        *"boolean false"*)
-          log "session unlocked"
+      screen_locked=true
+      prev_line=""
+    else
+      if echo "${prev_line}" | grep -q "; member=ActiveChanged$"; then
+        case "${line}" in
+          *"boolean true"*)
+            log "screensaver active"
 
-          reload_mate_panel_dconf
-          ;;
-      esac
+            dump_mate_panel_dconf
+            ;;
+          *"boolean false"*)
+            if ${screen_locked}; then
+              log "session unlocked"
+
+              reload_mate_panel_dconf
+
+              screen_locked=false
+            else
+              log "screensaver latent"
+            fi
+            ;;
+        esac
+      fi
+      prev_line="${line}"
     fi
-    prev_line="${line}"
   done
 
 # Avoid leaving orphaned lock file when the loop ends (e.g. dbus dies)
