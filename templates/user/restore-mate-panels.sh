@@ -15,6 +15,8 @@
 # Or update ~/.local/bin and restart the service:
 #   /bin/cp ~/.kit/ansible/roles/zoidy_panelsweet/templates/user/restore-mate-panels.sh ~/.local/bin
 #   systemctl --user restart restore-mate-panels.service
+#   # If mate-panels does not restart, run this:
+#   mate-panel --replace &
 
 # ***
 
