@@ -66,6 +66,11 @@ reload_mate_panel_dconf () {
   log "restored dconf ${DCONF_DIR}"
 
   if has_changed_mate_panel_dconf; then
+    # MAYBE/2024-02-27: I've never seen this path followed.
+    # - MAYBE: Sleep after detecting unlock, or run dbus-monitor
+    #   without expression and look for a later event to hook.
+    #   I.e., maybe mate-panel dconf is changed after the
+    #   ActiveChanged event signals.
     log "✗ replaced mate-panel"
   else
     log "✓ dconf unchanged"
