@@ -36,7 +36,7 @@ set -o nounset
 PID_FILE=/tmp/restore-mate-panels.sh.pid
 # Log file path
 LOG_FILE=/tmp/restore-mate-panels.sh.log
-MAX_LOG_LNS=10000
+MAX_LOG_LNS=${MAX_LOG_LNS:-10000}
 # Tmp dump path
 DCONF_DUMP=/tmp/restore-mate-panels.dump
 
