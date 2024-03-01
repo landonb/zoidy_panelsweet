@@ -153,6 +153,22 @@
 
 # ***
 
+# ISOFF/KLUGE/2024-03-01: (On LM 21.3 at least) Oftentimes when you click
+# the same window-list button more than once while never leaving focus,
+# clicking to maximize is ignored. E.g., if I hover over the Vim window-list
+# button and click, Vim is minimized, and another window comes to the front.
+# But if I click again, nothing happens. However, the Vim button is still
+# highlighted. And if I move the mouse off the Vim button, the highlight
+# moves from Vim to the other window that was fronted. And then I can click
+# Vim to maximize it. Which is annoying. So disabling this option.
+
+# [LM 21.3] Window List Preferences > Behavior [tab] > Window Thumbnails >
+# - ✗ Show thumbnails on hover
+- name: Disable window-list "Show thumbnails on hover"
+  ansible.builtin.shell: dconf write /org/mate/panel/objects/window-list/prefs/show-window-thumbnails false
+
+# ***
+
 # Remove the ⋮ three vertical dots/ellipsis that appear to the left of the window-list
 # and to the left of the notification area.
 # - DUNNO: Oddly, I cannot grab the dots, or do anything with them.
