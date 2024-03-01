@@ -33,17 +33,17 @@ DCONF_DUMP="${HOME}/.local/share/zoidy_panelsweet/dconf--org-mate-panel.dump"
 set -o nounset
 
 # Lock file path
-pidfile=/tmp/restore-mate-panels.sh.pid
+PID_FILE=/tmp/restore-mate-panels.sh.pid
 # Log file path
-logfile=/tmp/restore-mate-panels.sh.log
-log_lns=10000
+LOG_FILE=/tmp/restore-mate-panels.sh.log
+MAX_LOG_LNS=10000
 # Tmp dump path
-dumpfile=/tmp/restore-mate-panels.dump
+DCONF_DUMP=/tmp/restore-mate-panels.dump
 
 # Cleanup trap
 cleanup() {
   # Remove the lock file
-  rm -f ${pidfile}
+  rm -f ${PID_FILE}
   # Reset kernel signal catching
   trap - INT TERM EXIT
   # "Buy bye"
@@ -54,7 +54,7 @@ cleanup() {
 
 # Simple logging mechanism
 log() {
-  echo "$(date +%Y-%m-%d\ %X) -- ${USER} -- \"$@\"" >> "${logfile}"
+  echo "$(date +%Y-%m-%d\ %X) -- ${USER} -- \"$@\"" >> "${LOG_FILE}"
 }
 
 # The meat of what this daemon does:
@@ -84,9 +84,9 @@ reload_mate_panel_dconf () {
  ⬛🟫🟪🟦🟩🟨🟧🟥🟧🟨🟩🟦
 "
 
-  # Truncate the log file. Keep the last ${log_lns} lines.
-  if [ ${log_lns} -ge 0 ]; then
-    sed -i "${log_lns},\$ d" "${logfile}"
+  # Truncate the log file. Keep the last ${MAX_LOG_LNS} lines.
+  if [ ${MAX_LOG_LNS} -ge 0 ]; then
+    sed -i "${MAX_LOG_LNS},\$ d" "${LOG_FILE}"
   fi
 }
 
@@ -94,18 +94,18 @@ dump_mate_panel_dconf () {
   suffix="${1:-}"
 
   dconf dump ${DCONF_DIR} \
-    > "${dumpfile}${suffix}"
+    > "${DCONF_DUMP}${suffix}"
 }
 
 has_changed_mate_panel_dconf () {
   dump_mate_panel_dconf ".after"
 
-  ! diff -q "${dumpfile}" "${dumpfile}.after" > /dev/null
+  ! diff -q "${DCONF_DUMP}" "${DCONF_DUMP}.after" > /dev/null
 }
 
 main () {
   # Exit if lock file exists
-  if [ -e "${pidfile}" ]; then
+  if [ -e "${PID_FILE}" ]; then
     log "$0 already running..."
 
     exit
@@ -117,7 +117,7 @@ main () {
   log "daemon started..."
 
   # Create lock file with own PID inside
-  echo $$ > ${pidfile}
+  echo $$ > ${PID_FILE}
 
   # Restore dconf on initial logon (or whenever this daemon is started)
   force_reload=true
