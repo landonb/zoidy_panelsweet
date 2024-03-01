@@ -60,6 +60,8 @@ log() {
 # The meat of what this daemon does:
 # - Restore the panel arrangement.
 reload_mate_panel_dconf () {
+  local force_reload="${1:-false}"
+
   cat "${DCONF_DUMP}" \
     | dconf load ${DCONF_DIR}
 
@@ -67,7 +69,7 @@ reload_mate_panel_dconf () {
 
   local msg
 
-  if has_changed_mate_panel_dconf; then
+  if has_changed_mate_panel_dconf || ${force_reload}; then
     msg="✗ replaced mate-panel"
 
     mate-panel --replace &
@@ -117,7 +119,8 @@ log "daemon started..."
 echo $$ > ${pidfile}
 
 # Restore dconf on initial logon (or whenever this daemon is started)
-reload_mate_panel_dconf
+force_reload=true
+reload_mate_panel_dconf "${force_reload}"
 
 # Here's what you might see when locking, then unlocking the session.
 # - It's similar to letting the computer idle and the screensaver activating,
