@@ -68,11 +68,6 @@ reload_mate_panel_dconf () {
   local msg
 
   if has_changed_mate_panel_dconf; then
-    # MAYBE/2024-02-27: I've never seen this path followed.
-    # - MAYBE: Sleep after detecting unlock, or run dbus-monitor
-    #   without expression and look for a later event to hook.
-    #   I.e., maybe mate-panel dconf is changed after the
-    #   ActiveChanged event signals.
     msg="✗ replaced mate-panel"
   else
     msg=" ✓  dconf unchanged      "
@@ -85,11 +80,6 @@ reload_mate_panel_dconf () {
  ⬛🟫🟪🟦🟩🟨🟧🟥🟧🟨🟩🟦
 "
 
-  # This was originally in the `has_changed_mate_panel_dconf` branch
-  # above, but after using for a few days, that branch never appears to
-  # run. So trying dump_mate_panel_dconf as soon as session is locked,
-  # rather than atop this function; and trying --replace always (here),
-  # rather than in the `has_changed_mate_panel_dconf` if-branch.
   mate-panel --replace &
 
   # Truncate the log file. Keep the last ${log_lns} lines.
