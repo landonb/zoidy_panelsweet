@@ -69,6 +69,8 @@ reload_mate_panel_dconf () {
 
   if has_changed_mate_panel_dconf; then
     msg="✗ replaced mate-panel"
+
+    mate-panel --replace &
   else
     msg=" ✓  dconf unchanged      "
   fi
@@ -79,8 +81,6 @@ reload_mate_panel_dconf () {
  🟥   ${msg}  🟧
  ⬛🟫🟪🟦🟩🟨🟧🟥🟧🟨🟩🟦
 "
-
-  mate-panel --replace &
 
   # Truncate the log file. Keep the last ${log_lns} lines.
   if [ ${log_lns} -ge 0 ]; then
