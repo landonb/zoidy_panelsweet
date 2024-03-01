@@ -141,6 +141,13 @@
 
 # ***
 
+# ISOFF/2024-02-08: I often get bit by mouse scrolling: I'll be using mouse
+# wheel to scroll through Vim, or Chrome, or a terminal, and I'll have the
+# mouse near the bottom of the window, but I'll inadvertently drift over the
+# window-list. Then, all of a sudden, there's a rapid fire cascade of other
+# windows popping to the front, because I gave focus to the window-list.
+# - Long story short, disable mouse scrolling.
+
 - name: Disable window-list "Disable mouse scrolling"
   ansible.builtin.shell: dconf write /org/mate/panel/objects/window-list/prefs/scroll-enabled false
 
