@@ -141,7 +141,7 @@
 
 # ***
 
-- name: Disable window-list "Enable mouse scrolling"
+- name: Disable window-list "Disable mouse scrolling"
   ansible.builtin.shell: dconf write /org/mate/panel/objects/window-list/prefs/scroll-enabled false
 
 # ***
