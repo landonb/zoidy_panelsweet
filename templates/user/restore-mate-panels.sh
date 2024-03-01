@@ -40,6 +40,31 @@ MAX_LOG_LNS=10000
 # Tmp dump path
 DCONF_DUMP=/tmp/restore-mate-panels.dump
 
+# ***
+
+# These notify-send icons were picked for the 'Mint-L' theme (LM 21.3).
+# - You can change these to match icons you like for your preferred theme.
+#   And you can use this copy-pasta to browse the icons for your theme.
+
+__CPYST__="$(
+cat <<'EOF'
+  icon_theme="$( \
+    gsettings get org.mate.interface icon-theme \
+    | sed "s/^'//" | sed "s/'\$//"
+  )"
+  # Open gthumb, then look for *48/ directories.
+  gthumb /usr/share/icons/${icon_theme}/ &
+  # ALTLY: (BWARE: Don't run similar using gthumb):
+  eog $(find /usr/share/icons/${icon_theme} -path *48/*.png)
+EOF
+)"
+
+ICON_REPLACED="${ICON_REPLACED:-computer-fail}"
+
+ICON_UNCHANGED="${ICON_UNCHANGED:-edit-clear-all}"
+
+# ***
+
 # Cleanup trap
 cleanup() {
   # Remove the lock file
@@ -68,18 +93,21 @@ reload_mate_panel_dconf () {
   log "restored dconf ${DCONF_DIR}"
 
   local msg
+  local icon
 
   if has_changed_mate_panel_dconf || ${force_reload}; then
     msg="✗ replaced mate-panel"
+    icon="${ICON_REPLACED}"
 
     mate-panel --replace &
   else
     msg=" ✓  dconf unchanged      "
+    icon="${ICON_UNCHANGED}"
   fi
 
   log "${msg}"
 
-  notify-send -i "computer-fail" " 🟧🟨🟩🟦🟪🟫⬛🟫🟪🟦🟩🟨
+  notify-send -i "${icon}" " 🟧🟨🟩🟦🟪🟫⬛🟫🟪🟦🟩🟨
  🟥   ${msg}  🟧
  ⬛🟫🟪🟦🟩🟨🟧🟥🟧🟨🟩🟦
 "
