@@ -196,12 +196,12 @@ main () {
               if ${screen_locked}; then
                 log "session unlocked"
 
-                reload_mate_panel_dconf
-
                 screen_locked=false
               else
                 log "screensaver latent"
               fi
+
+              reload_mate_panel_dconf
               ;;
           esac
         fi
