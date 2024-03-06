@@ -18,6 +18,9 @@
 #   # If mate-panels does not restart, run this:
 #   mate-panel --replace &
 
+# CPYST/2024-03-05:
+#   diff "${DCONF_DUMP}" <(dconf dump ${DCONF_DIR})
+
 # ***
 
 # The screensaver name, e.g.:
