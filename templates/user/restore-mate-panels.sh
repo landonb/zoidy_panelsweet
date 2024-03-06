@@ -147,6 +147,8 @@ main () {
   # Create lock file with own PID inside
   echo $$ > ${PID_FILE}
 
+  dump_mate_panel_dconf
+
   # Restore dconf on initial logon (or whenever this daemon is started)
   force_reload=true
   reload_mate_panel_dconf "${force_reload}"
