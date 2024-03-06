@@ -183,6 +183,9 @@ main () {
     while read line; do
       if echo "${line}" | grep -q "; member=Lock$"; then
         log "session locked"
+        # Note that "screensaver active" always follows.
+
+        dump_mate_panel_dconf
 
         screen_locked=true
         prev_line=""
@@ -192,7 +195,11 @@ main () {
             *"boolean true"*)
               log "screensaver active"
 
-              dump_mate_panel_dconf
+              # Not sure it matters, but we dumped earlier, on "session locked".
+              # - Just in case dconf changed since then, don't overwrite dump.
+              if ! ${screen_locked}; then
+                dump_mate_panel_dconf
+              fi
               ;;
             *"boolean false"*)
               if ${screen_locked}; then
