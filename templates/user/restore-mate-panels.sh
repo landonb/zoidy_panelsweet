@@ -90,21 +90,28 @@ log() {
 reload_mate_panel_dconf () {
   local force_reload="${1:-false}"
 
-  cat "${DCONF_DUMP}" \
-    | dconf load ${DCONF_DIR}
-
-  log "restored dconf ${DCONF_DIR}"
-
   local msg
-  local icon
+  local icon="${ICON_UNCHANGED}"
 
-  if has_changed_mate_panel_dconf || ${force_reload}; then
+  if has_changed_mate_panel_dconf; then
+    force_reload=true
+
     msg="✗ replaced mate-panel"
+  elif ${force_reload}; then
+    msg="✗ clobberd mate-panel"
+  else
+    msg=" ✓  dconf unchanged      "
+  fi
+
+  cat "${DCONF_DUMP}" | dconf load ${DCONF_DIR}
+
+  log "restored dconf ${DCONF_DIR} (always)"
+
+  if ${force_reload}; then
     icon="${ICON_REPLACED}"
 
     mate-panel --replace &
   else
-    msg=" ✓  dconf unchanged      "
     icon="${ICON_UNCHANGED}"
   fi
 
