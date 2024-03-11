@@ -189,12 +189,25 @@ main () {
   # - It's similar to letting the computer idle and the screensaver activating,
   #   in which case you'll see both ActiveChanged lines but not the Lock message.
   #
-  # method call time=1709087779.758303 sender=:1.8518 -> destination=org.mate.ScreenSaver
+  # method call time=1710185397.760220 sender=:1.8518 -> destination=org.mate.ScreenSaver
   #   serial=3 path=/org/mate/ScreenSaver; interface=org.mate.ScreenSaver; member=Lock
-  # signal time=1709087781.205881 sender=:1.36 -> destination=(null destination) serial=197
+  # ...
+  # signal time=1710185399.229279 sender=:1.36 -> destination=(null destination) serial=197
   #   path=/org/mate/ScreenSaver; interface=org.mate.ScreenSaver; member=ActiveChanged
   #    boolean true
-  # signal time=1709087785.998767 sender=:1.36 -> destination=(null destination) serial=198
+  # signal time=1710185399.229530 sender=:1.15 -> destination=(null destination) serial=646
+  #   path=/org/gnome/SessionManager/Presence; interface=org.gnome.SessionManager.Presence;
+  #   member=StatusChanged
+  #    uint32 3
+  # # Locked
+  # ...
+  # # When Unlocked, or on Wake from screensaver
+  # method call time=1710185406.138487 sender=:1.37 -> destination=org.freedesktop.DBus
+  #   serial=105 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=AddMatch
+  #    string "type='signal',interface='ca.desrt.dconf.Writer',path='/ca/desrt/dconf/Writer/user',
+  #      arg0path='/org/mate/desktop/background/'"
+  # ...
+  # signal time=1710185410.112904 sender=:1.36 -> destination=(null destination) serial=198
   #   path=/org/mate/ScreenSaver; interface=org.mate.ScreenSaver; member=ActiveChanged
   #    boolean false
 
