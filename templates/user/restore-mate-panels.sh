@@ -230,7 +230,7 @@ main () {
 
   dbus-monitor --address "${DBUS_SESSION_BUS_ADDRESS}" ${expr} | \
     while read line; do
-      if echo "${line}" | grep -q "; member=Lock$"; then
+      if echo "${line}" | grep -q "interface=${SCREENSAVER_ID}; member=Lock$"; then
         log "session locked"
         # Note that "screensaver active" always follows.
 
