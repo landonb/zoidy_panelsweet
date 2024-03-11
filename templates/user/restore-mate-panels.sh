@@ -103,9 +103,7 @@ reload_mate_panel_dconf () {
     msg=" ✓  dconf unchanged      "
   fi
 
-  cat "${DCONF_DUMP}" | dconf load ${DCONF_DIR}
-
-  log "restored dconf ${DCONF_DIR} (always)"
+  dconf_load_always
 
   if ${force_reload}; then
     icon="${ICON_REPLACED}"
@@ -126,6 +124,14 @@ reload_mate_panel_dconf () {
   if [ ${MAX_LOG_LNS} -ge 0 ]; then
     sed -i "${MAX_LOG_LNS},\$ d" "${LOG_FILE}"
   fi
+}
+
+# ***
+
+dconf_load_always () {
+  cat "${DCONF_DUMP}" | dconf load ${DCONF_DIR}
+
+  log "restored dconf ${DCONF_DIR} (always)"
 }
 
 dump_mate_panel_dconf () {
