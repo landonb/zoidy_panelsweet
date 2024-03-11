@@ -115,7 +115,9 @@ reload_mate_panel_dconf () {
 
   # ***
 
-  log "${msg}"
+  # SAVVY: Replace narrower spaces with single normal space,
+  #        and remove leading and trailing spaces.
+  log "$(echo ${msg} | sed 's/[  ]\+/ /g' | sed 's/^ \+//' | sed 's/ \+$//')"
 
   notify-send -i "${icon}" " 🟧🟨🟩🟦🟪🟫⬛🟫🟪🟦🟩🟨
  🟥   ${msg}  🟧
@@ -137,6 +139,8 @@ reload_mate_panel_dconf () {
 should_reload_mate_panel () {
   local force_reload="$1"
 
+  # SAVVY: Note the use of narrower spaces (` `, ` `) to make notify-send
+  # box ornamentation align nicely.
   local msg
 
   if has_changed_mate_panel_dconf; then
