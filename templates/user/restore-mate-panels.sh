@@ -220,7 +220,11 @@ main () {
   export $(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$(pidof -s dbus-daemon)/environ | xargs -0)
 
   # DBus watch expression
-  local expr="type=method_call,interface=${SCREENSAVER_ID} type=signal,interface=${SCREENSAVER_ID}"
+  local expr="$( \
+    printf "%s %s" \
+      "type=method_call,interface=${SCREENSAVER_ID}" \
+      "type=signal,interface=${SCREENSAVER_ID}"
+  )"
 
   log "➰ looping: dbus-monitor --address \"${DBUS_SESSION_BUS_ADDRESS}\" ${expr}"
 
