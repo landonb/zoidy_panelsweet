@@ -36,12 +36,12 @@ DCONF_DUMP="${HOME}/.local/share/zoidy_panelsweet/dconf--org-mate-panel.dump"
 set -o nounset
 
 # Lock file path
-PID_FILE=/tmp/restore-mate-panels.sh.pid
+PID_FILE="/tmp/restore-mate-panels.sh.pid"
 # Log file path
-LOG_FILE=/tmp/restore-mate-panels.sh.log
+LOG_FILE="/tmp/restore-mate-panels.sh.log"
 MAX_LOG_LNS=${MAX_LOG_LNS:-10000}
 # Tmp dump path
-DCONF_DUMP=/tmp/restore-mate-panels.dump
+DCONF_DUMP="/tmp/restore-mate-panels.dump"
 
 # ***
 
@@ -71,7 +71,7 @@ ICON_UNCHANGED="${ICON_UNCHANGED:-edit-clear-all}"
 # Cleanup trap
 cleanup() {
   # Remove the lock file
-  rm -f ${PID_FILE}
+  command rm -f "${PID_FILE}"
   # Reset kernel signal catching
   trap - INT TERM EXIT
   # "Buy bye"
@@ -148,12 +148,12 @@ main () {
   log "daemon started..."
 
   # Create lock file with own PID inside
-  echo $$ > ${PID_FILE}
+  echo $$ > "${PID_FILE}"
 
   dump_mate_panel_dconf
 
   # Restore dconf on initial logon (or whenever this daemon is started)
-  force_reload=true
+  local force_reload=true
   reload_mate_panel_dconf "${force_reload}"
 
   # Here's what you might see when locking, then unlocking the session.
@@ -169,8 +169,8 @@ main () {
   #   path=/org/mate/ScreenSaver; interface=org.mate.ScreenSaver; member=ActiveChanged
   #    boolean false
 
-  screen_locked=true
-  prev_line=""
+  local screen_locked=true
+  local prev_line=""
 
   # Usually `dbus-daemon` address can be guessed (`-s` returns 1st PID found)
   # - Pipe to `xargs -0` to suppress message:
@@ -178,7 +178,7 @@ main () {
   export $(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$(pidof -s dbus-daemon)/environ | xargs -0)
 
   # DBus watch expression
-  expr="type=method_call,interface=${SCREENSAVER_ID} type=signal,interface=${SCREENSAVER_ID}"
+  local expr="type=method_call,interface=${SCREENSAVER_ID} type=signal,interface=${SCREENSAVER_ID}"
 
   log "➰ looping: dbus-monitor --address \"${DBUS_SESSION_BUS_ADDRESS}\" ${expr}"
 
