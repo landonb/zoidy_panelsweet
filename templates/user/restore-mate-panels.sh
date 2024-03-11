@@ -80,10 +80,14 @@ cleanup() {
   exit
 }
 
+# ***
+
 # Simple logging mechanism
 log() {
   echo "$(date +%Y-%m-%d\ %X) -- ${USER} -- \"$@\"" >> "${LOG_FILE}"
 }
+
+# ***
 
 # The meat of what this daemon does:
 # - Restore the panel arrangement.
@@ -99,6 +103,8 @@ reload_mate_panel_dconf () {
 
   dconf_load_always
 
+  # ***
+
   if ${force_reload}; then
     icon="${ICON_REPLACED}"
 
@@ -107,12 +113,16 @@ reload_mate_panel_dconf () {
     icon="${ICON_UNCHANGED}"
   fi
 
+  # ***
+
   log "${msg}"
 
   notify-send -i "${icon}" " 🟧🟨🟩🟦🟪🟫⬛🟫🟪🟦🟩🟨
  🟥   ${msg}  🟧
  ⬛🟫🟪🟦🟩🟨🟧🟥🟧🟨🟩🟦
 "
+
+  # ***
 
   # Truncate the log file. Keep the last ${MAX_LOG_LNS} lines.
   if [ ${MAX_LOG_LNS} -ge 0 ]; then
@@ -162,6 +172,8 @@ has_changed_mate_panel_dconf () {
 
   ! diff -q "${DCONF_DUMP}" "${DCONF_DUMP}.after" > /dev/null
 }
+
+# ***
 
 main () {
   # Exit if lock file exists
