@@ -93,14 +93,8 @@ reload_mate_panel_dconf () {
   local msg
   local icon="${ICON_UNCHANGED}"
 
-  if has_changed_mate_panel_dconf; then
+  if msg="$(should_reload_mate_panel "${force_reload}")"; then
     force_reload=true
-
-    msg="✗ replaced mate-panel"
-  elif ${force_reload}; then
-    msg="✗ clobberd mate-panel"
-  else
-    msg=" ✓  dconf unchanged      "
   fi
 
   dconf_load_always
@@ -124,6 +118,28 @@ reload_mate_panel_dconf () {
   if [ ${MAX_LOG_LNS} -ge 0 ]; then
     sed -i "${MAX_LOG_LNS},\$ d" "${LOG_FILE}"
   fi
+}
+
+# ***
+
+should_reload_mate_panel () {
+  local force_reload="$1"
+
+  local msg
+
+  if has_changed_mate_panel_dconf; then
+    force_reload=true
+
+    msg="✗ replaced mate-panel"
+  elif ${force_reload}; then
+    msg="✗ clobberd mate-panel"
+  else
+    msg=" ✓  dconf unchanged      "
+  fi
+
+  echo "${msg}"
+
+  ${force_reload}
 }
 
 # ***
