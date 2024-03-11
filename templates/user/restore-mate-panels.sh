@@ -125,7 +125,9 @@ reload_mate_panel_dconf () {
   # ***
 
   # Truncate the log file. Keep the last ${MAX_LOG_LNS} lines.
-  if [ ${MAX_LOG_LNS} -ge 0 ]; then
+  if [ ${MAX_LOG_LNS} -ge 0 ] \
+    && [ $(wc -l ${LOG_FILE} | cut -d" " -f1) -gt $((${MAX_LOG_LNS} * 2)) ] \
+  ; then
     sed -i "${MAX_LOG_LNS},\$ d" "${LOG_FILE}"
   fi
 }
