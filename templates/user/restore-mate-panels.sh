@@ -167,7 +167,11 @@ should_reload_mate_panel () {
   # box ornamentation align nicely.
   local msg
 
-  if has_changed_mate_panel_dconf; then
+  if ! [ -s "${DCONF_DUMP_CANON}" ]; then
+    force_reload=false
+
+    msg="🌪️ dconf stash absent     "
+  elif has_changed_mate_panel_dconf; then
     force_reload=true
 
     msg="✗ replaced mate-panel"
@@ -186,6 +190,26 @@ should_reload_mate_panel () {
 
 dconf_load_previous_dump () {
   local force_reload="${1:-false}"
+
+  if ! [ -s "${DCONF_DUMP_CANON}" ]; then
+    local msg icon
+
+    if [ -s "${DCONF_DUMP_AFTER}" ]; then
+      msg="BWARE: dconf stash absent"
+      icon="face-sick"
+    else
+      # No /tmp/restore-mate-panels.dump means user hasn't slept/locked
+      # with daemon running, so not an error the stash absent.
+      msg="HELLO: Inaugural restore-mate-panels runtime"
+      icon="face-uncertain"
+    fi
+
+    log "${msg}"
+
+    notify-send -i "${icon}" "${msg}" "$(basename $0)"
+
+    return 0
+  fi 
 
   ${force_reload} || return 0
 
