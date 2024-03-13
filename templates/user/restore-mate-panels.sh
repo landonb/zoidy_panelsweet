@@ -102,7 +102,7 @@ reload_mate_panel_dconf () {
     force_reload=true
   fi
 
-  dconf_load_always
+  dconf_load_previous_dump "${force_reload}"
 
   # ***
 
@@ -184,10 +184,14 @@ should_reload_mate_panel () {
 
 # ***
 
-dconf_load_always () {
+dconf_load_previous_dump () {
+  local force_reload="${1:-false}"
+
+  ${force_reload} || return 0
+
   cat "${DCONF_DUMP_CANON}" | dconf load ${DCONF_DIR}
 
-  log "restored dconf ${DCONF_DIR} (always)"
+  log "restored dconf ${DCONF_DIR} (${DCONF_DUMP_CANON})"
 }
 
 dump_mate_panel_dconf_canon () {
