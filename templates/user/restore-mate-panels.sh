@@ -18,9 +18,6 @@
 #   # If mate-panels does not restart, run this:
 #   mate-panel --replace &
 
-# CPYST/2024-03-05:
-#   diff "${DCONF_DUMP}" <(dconf dump ${DCONF_DIR})
-
 # ***
 
 # The screensaver name, e.g.:
@@ -28,7 +25,11 @@
 #   org.freedesktop.ScreenSaver
 SCREENSAVER_ID="org.mate.ScreenSaver"
 DCONF_DIR="/org/mate/panel/"
-DCONF_DUMP="${HOME}/.local/share/zoidy_panelsweet/dconf--org-mate-panel.dump"
+DCONF_DUMP_NAME="dconf--org-mate-panel.dump"
+DCONF_DUMP_CANON="${HOME}/.local/share/zoidy_panelsweet/${DCONF_DUMP_NAME}"
+
+# CPYST/2024-03-05: Compare dump to current `dconf` settings:
+#   diff "${DCONF_DUMP_CANON}" <(dconf dump ${DCONF_DIR})
 
 # ***
 
@@ -41,7 +42,7 @@ PID_FILE="/tmp/restore-mate-panels.sh.pid"
 LOG_FILE="/tmp/restore-mate-panels.sh.log"
 MAX_LOG_LNS=${MAX_LOG_LNS:-10000}
 # Tmp dump path
-DCONF_DUMP="/tmp/restore-mate-panels.dump"
+DCONF_DUMP_AFTER="/tmp/restore-mate-panels.dump.after"
 
 # ***
 
@@ -161,22 +162,25 @@ should_reload_mate_panel () {
 # ***
 
 dconf_load_always () {
-  cat "${DCONF_DUMP}" | dconf load ${DCONF_DIR}
+  cat "${DCONF_DUMP_CANON}" | dconf load ${DCONF_DIR}
 
   log "restored dconf ${DCONF_DIR} (always)"
 }
 
-dump_mate_panel_dconf () {
-  suffix="${1:-}"
-
+dump_mate_panel_dconf_canon () {
   dconf dump ${DCONF_DIR} \
-    > "${DCONF_DUMP}${suffix}"
+    > "${DCONF_DUMP_CANON}"
+}
+
+dump_mate_panel_dconf_after () {
+  dconf dump ${DCONF_DIR} \
+    > "${DCONF_DUMP_AFTER}"
 }
 
 has_changed_mate_panel_dconf () {
-  dump_mate_panel_dconf ".after"
+  dump_mate_panel_dconf_after
 
-  ! diff -q "${DCONF_DUMP}" "${DCONF_DUMP}.after" > /dev/null
+  ! diff -q "${DCONF_DUMP_CANON}" "${DCONF_DUMP_AFTER}" > /dev/null
 }
 
 # ***
@@ -197,7 +201,7 @@ main () {
   # Create lock file with own PID inside
   echo $$ > "${PID_FILE}"
 
-  dump_mate_panel_dconf
+  dump_mate_panel_dconf_canon
 
   # Restore dconf on initial logon (or whenever this daemon is started)
   local force_reload=true
@@ -252,7 +256,7 @@ main () {
         log "session locked"
         # Note that "screensaver active" always follows.
 
-        dump_mate_panel_dconf
+        dump_mate_panel_dconf_canon
 
         screen_locked=true
         prev_line=""
@@ -265,7 +269,7 @@ main () {
               # Not sure it matters, but we dumped earlier, on "session locked".
               # - Just in case dconf changed since then, don't overwrite dump.
               if ! ${screen_locked}; then
-                dump_mate_panel_dconf
+                dump_mate_panel_dconf_canon
               fi
               ;;
             *"boolean false"*)
