@@ -116,14 +116,18 @@ reload_mate_panel_dconf () {
 
   # ***
 
+  local dump_age
+  if [ -s "${DCONF_DUMP_CANON}" ]; then
+    dump_age="$(echo "$((($(date +%s) - $(date +%s -r "${DCONF_DUMP_CANON}")) / 60)) mins")"
+  else
+    dump_age="N/a"
+  fi
+
   # SAVVY: Replace narrower spaces with single normal space,
   #        and remove leading and trailing spaces.
-  log "$(echo ${msg} | sed 's/[  ]\+/ /g' | sed 's/^ \+//' | sed 's/ \+$//')"
+  log "$(echo ${msg} | sed 's/[  ]\+/ /g' | sed 's/^ \+//' | sed 's/ \+$//') [${dump_age} since dump]"
 
-  notify-send -i "${icon}" " 🟧🟨🟩🟦🟪🟫⬛🟫🟪🟦🟩🟨
- 🟥   ${msg}  🟧
- ⬛🟫🟪🟦🟩🟨🟧🟥🟧🟨🟩🟦
-"
+  notify_send "${msg}" "${icon}" "${dump_age}"
 
   # ***
 
@@ -133,6 +137,25 @@ reload_mate_panel_dconf () {
   ; then
     sed -i "${MAX_LOG_LNS},\$ d" "${LOG_FILE}"
   fi
+}
+
+# ***
+
+notify_send () {
+  local msg="$1"
+  local icon="${2:-emblem-important}"
+  local dump_age="$3"
+
+  local addendum=""
+  if [ -n "${dump_age}" ]; then
+    addendum="
+             [${dump_age} since dump]"
+  fi
+
+  notify-send -i "${icon}" "\
+ 🟧🟨🟩🟦🟪🟫⬛🟫🟪🟦🟩🟨
+ 🟥   ${msg}  🟧
+ ⬛🟫🟪🟦🟩🟨🟧🟥🟧🟨🟩🟦${addendum}"
 }
 
 # ***
