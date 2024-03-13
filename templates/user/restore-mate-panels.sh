@@ -102,6 +102,12 @@ reload_mate_panel_dconf () {
     force_reload=true
   fi
 
+  if ! ${force_reload}; then
+    if mate_panel_process_was_reborn "${force_reload}"; then
+      force_reload=true
+    fi
+  fi
+
   dconf_load_previous_dump "${force_reload}"
 
   # ***
@@ -188,6 +194,84 @@ should_reload_mate_panel () {
   echo "${msg}"
 
   ${force_reload}
+}
+
+# ***
+
+# Get age of mate-panel.
+# - If younger than when locked, assume panels got messed up and need a kick.
+# - E.g.,
+#   $ ps -o lstart -C mate-panel
+#                    STARTED
+#   Wed Mar 13 10:49:42 2024
+mate_panel_process_was_reborn () {
+  local force_reload="$1"
+
+  local age_diff_s
+  age_diff_s="$(print_mate_panel_process_age_since_dump_time)"
+
+  if [ ${age_diff_s} -ge 0 ]; then
+    force_reload=true
+  fi
+
+  ${force_reload}
+}
+
+print_mate_panel_process_age_since_dump_time () {
+  local age_diff_s=0
+
+  local msg=""
+  local icon=""
+  local addendum=""
+
+  local output_lns
+  output_lns=$(ps_query_mate_panel_start | wc -l)
+
+  if [ ${output_lns} -ne 2 ]; then
+    icon="appointment-angry"
+    if [ ${output_lns} -lt 2 ]; then
+      msg="❓❗ No \`mate-panel\`!?"
+    else
+      msg="❓❗ ≥2 \`mate-panel\`s!?"
+    fi
+  else
+    local start_time
+    start_time="$(date +%s -d "$(ps_query_mate_panel_start | tail +2)")"
+
+    age_diff_s="$((${start_time} - $(date +%s -r "${DCONF_DUMP_CANON}")))"
+
+    local age_diff_m=0
+    age_diff_m="$((${age_diff_s} / 60))"
+
+    if [ ${age_diff_s} -ge 0 ]; then
+      # mate-panel newer than dump file, so mate-panel restarted after sleep/lock.
+      icon="appointment-new"
+      msg="❗ newer \`mate-panel\`! "
+      addendum=" [mate-panel ${age_diff_m}m newer than dump]"
+    else
+      icon="face-tired"
+      msg="✅  older \`mate-panel\`  "
+      addendum=" [mate-panel $((${age_diff_m} * -1))m older than dump]"
+    fi
+  fi
+
+  # AVOID: Strips everything after "❓❗":
+  #   log "$(strip_and_normalize_whitespace ${msg})${addendum}"
+  log "$(echo ${msg} | sed 's/^ \+//' | sed 's/ \+$//')${addendum}"
+
+  if [ -n "${msg}" ]; then
+    notify-send -i "${icon}" "\
+ 🦐💫🧟💦🍇💩💣💩🍇💦🧟💫
+ 💥   ${msg}  🦐
+ 💣💩🍇💦🧟💫🦐💥🦐💫🧟💦
+${addendum}"
+  fi
+
+  echo "${age_diff_s}"
+}
+
+ps_query_mate_panel_start () {
+  ps -o lstart -C mate-panel
 }
 
 # ***
