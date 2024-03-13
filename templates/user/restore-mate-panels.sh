@@ -123,9 +123,7 @@ reload_mate_panel_dconf () {
     dump_age="N/a"
   fi
 
-  # SAVVY: Replace narrower spaces with single normal space,
-  #        and remove leading and trailing spaces.
-  log "$(echo ${msg} | sed 's/[  ]\+/ /g' | sed 's/^ \+//' | sed 's/ \+$//') [${dump_age} since dump]"
+  log "$(strip_and_normalize_whitespace "${msg}") [${dump_age} since dump]"
 
   notify_send "${msg}" "${icon}" "${dump_age}"
 
@@ -140,6 +138,12 @@ reload_mate_panel_dconf () {
 }
 
 # ***
+
+# SAVVY: Replace narrower spaces with single normal space,
+#        and remove leading and trailing spaces.
+strip_and_normalize_whitespace () {
+  echo "$1" | sed 's/[  ]\+/ /g' | sed 's/^ \+//' | sed 's/ \+$//'
+}
 
 notify_send () {
   local msg="$1"
