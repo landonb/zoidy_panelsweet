@@ -2,7 +2,8 @@
 # vim:ft=desktop
 [Desktop Entry]
 TryExec=mate-terminal
-Exec=/bin/bash -c "mate-terminal -e '/bin/bash --noprofile --norc' --geometry=130x48+402+89"
+# Reset PATH, lest it's a copy of your (full) mate-desktop PATH
+Exec=/bin/bash -c "PATH=$(getconf PATH) mate-terminal -e '/bin/bash --noprofile --norc' --geometry=130x48+402+89"
 Icon={{ ansible_env.HOME }}/.config/zoidy_matecocido/icons/terminal_and-breads_1343964.svg
 Icon[en_US]={{ ansible_env.HOME }}/.config/zoidy_matecocido/icons/terminal_and-breads_1343964.svg
 Type=Application
