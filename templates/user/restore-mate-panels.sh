@@ -13,7 +13,9 @@
 # CPYST/2024-02-21: After editing this file, either run the Ansible task:
 #   ANSIBLE_DEBUG=0 ansible-playbook /path/to/site.yml -l $(hostname) --tags zoidy_panelsweet
 # Or update ~/.local/bin and restart the service:
-#   /bin/cp ~/.kit/ansible/roles/zoidy_panelsweet/templates/user/restore-mate-panels.sh ~/.local/bin
+#   command cp -- \
+#     ~/.kit/ansible/roles/zoidy_panelsweet/templates/user/restore-mate-panels.sh \
+#     ~/.local/bin
 #   systemctl --user restart restore-mate-panels.service
 #   # If mate-panels does not restart, run this:
 #   mate-panel --replace &
