@@ -294,7 +294,7 @@ dconf_load_previous_dump () {
 
     log "${msg}"
 
-    notify-send -i "${icon}" "${msg}" "$(basename $0)"
+    notify-send -i "${icon}" "${msg}" "$(basename -- "$0")"
 
     return 0
   fi 
