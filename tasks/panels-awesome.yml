@@ -29,7 +29,7 @@
 # ***
 
 # E.g.,:
-#   /bin/rm -rf ~/.config/mate/panel2.d/default/launchers/
+#   command rm -rf ~/.config/mate/panel2.d/default/launchers/
 - name: Clear Existing MATE Panel Launcher Files
   ansible.builtin.file:
     state: absent
