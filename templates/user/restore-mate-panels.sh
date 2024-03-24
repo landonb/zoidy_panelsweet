@@ -119,7 +119,7 @@ reload_mate_panel_dconf () {
   if ${force_reload}; then
     icon="${ICON_REPLACED}"
 
-    mate-panel --replace &
+    mate_panel_replace
   else
     icon="${ICON_UNCHANGED}"
   fi
@@ -155,6 +155,12 @@ reload_mate_panel_dconf () {
 
 # ***
 
+mate_panel_replace () {
+  mate-panel --replace &
+}
+
+# ***
+
 prompt_reload_anyway () {
   local question_txt="Reload mate-panel anyway?"
 
@@ -171,7 +177,7 @@ prompt_reload_anyway () {
       kill -s 9 ${timeout_pid} > /dev/null 2>&1
 
       if wait ${zenity_pid}; then
-        mate-panel --replace &
+        mate_panel_replace
       fi
 
       break
