@@ -106,6 +106,8 @@ reload_mate_panel_dconf () {
 
   if ! ${force_reload}; then
     if mate_panel_process_was_reborn "${force_reload}"; then
+      log "mate_panel_process_was_reborn"
+
       force_reload=true
     fi
   fi
@@ -367,6 +369,8 @@ has_changed_mate_panel_dconf () {
 main () {
   # Exit if lock file exists
   if [ -e "${PID_FILE}" ]; then
+    >&2 echo "$0 already running..."
+
     log "$0 already running..."
 
     exit
