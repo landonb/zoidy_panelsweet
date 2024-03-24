@@ -157,6 +157,13 @@ reload_mate_panel_dconf () {
 
 mate_panel_replace () {
   mate-panel --replace &
+
+  refresh_dconf_dump_canon_timestamp
+}
+
+# So that time compare doesn't trigger another replace.
+refresh_dconf_dump_canon_timestamp () {
+  touch "${DCONF_DUMP_CANON}"
 }
 
 # ***
