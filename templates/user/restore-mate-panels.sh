@@ -143,6 +143,44 @@ reload_mate_panel_dconf () {
   ; then
     sed -i "${MAX_LOG_LNS},\$ d" "${LOG_FILE}"
   fi
+
+  # ***
+
+  if ! ${force_reload}; then
+    prompt_reload_anyway
+  fi
+}
+
+# ***
+
+prompt_reload_anyway () {
+  local question_txt="Reload mate-panel anyway?"
+
+  zenity --question --text="${question_txt}" &
+  local zenity_pid="$!"
+
+  sleep ${RMP_ZENITY_TIMEOUT:-2.69} &
+  local timeout_pid="$!"
+
+  # ***
+
+  while true; do
+    if ! ps -p ${zenity_pid} > /dev/null; then
+      kill -s 9 ${timeout_pid} > /dev/null 2>&1
+
+      if wait ${zenity_pid}; then
+        mate-panel --replace &
+      fi
+
+      break
+    elif ! ps -p ${timeout_pid} > /dev/null; then
+      kill -s 9 ${zenity_pid} > /dev/null 2>&1
+
+      break
+    else
+      sleep ${RMP_WAIT_INTERVAL:-0.25}
+    fi
+  done
 }
 
 # ***
