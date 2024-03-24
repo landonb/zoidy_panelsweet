@@ -291,7 +291,7 @@ print_mate_panel_process_age_since_dump_time () {
     local age_diff_m=0
     age_diff_m="$((${age_diff_s} / 60))"
 
-    if [ ${age_diff_s} -ge 0 ]; then
+    if [ ${age_diff_s} -gt 0 ]; then
       # mate-panel newer than dump file, so mate-panel restarted after sleep/lock.
       icon="appointment-new"
       msg="❗ newer \`mate-panel\`! "
