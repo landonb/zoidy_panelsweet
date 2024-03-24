@@ -167,7 +167,7 @@ prompt_reload_anyway () {
   zenity --question --text="${question_txt}" &
   local zenity_pid="$!"
 
-  sleep ${RMP_ZENITY_TIMEOUT:-2.69} &
+  sleep ${RMP_ZENITY_TIMEOUT:-4.69} &
   local timeout_pid="$!"
 
   # ***
