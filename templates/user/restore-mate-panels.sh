@@ -390,7 +390,7 @@ main () {
   fi
 
   # Call cleanup() if e.g. killed
-  trap cleanup INT TERM EXIT
+  trap -- cleanup INT TERM EXIT
 
   log "daemon started..."
 
