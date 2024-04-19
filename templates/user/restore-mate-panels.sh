@@ -217,10 +217,12 @@ notify_send () {
              [${dump_age} since dump]"
   fi
 
-  notify-send -i "${icon}" "\
+  if ${RMP_NOTIFY_SEND_ENABLE:-false}; then
+    notify-send -i "${icon}" "\
  🟧🟨🟩🟦🟪🟫⬛🟫🟪🟦🟩🟨
  🟥   ${msg}  🟧
  ⬛🟫🟪🟦🟩🟨🟧🟥🟧🟨🟩🟦${addendum}"
+  fi
 }
 
 # ***
@@ -314,12 +316,14 @@ print_mate_panel_process_age_since_dump_time () {
   #   log "$(strip_and_normalize_whitespace ${msg})${addendum}"
   log "$(echo ${msg} | sed 's/^ \+//' | sed 's/ \+$//')${addendum}"
 
-  if [ -n "${msg}" ]; then
-    notify-send -i "${icon}" "\
+  if ${RMP_NOTIFY_SEND_ENABLE:-false}; then
+    if [ -n "${msg}" ]; then
+      notify-send -i "${icon}" "\
  🦐💫🧟💦🍇💩💣💩🍇💦🧟💫
  💥   ${msg}  🦐
  💣💩🍇💦🧟💫🦐💥🦐💫🧟💦
 ${addendum}"
+    fi
   fi
 
   echo "${age_diff_s}"
@@ -349,6 +353,7 @@ dconf_load_previous_dump () {
 
     log "${msg}"
 
+    # IGNOR: if ${RMP_NOTIFY_SEND_ENABLE:-false}; then notify-send ...; fi
     notify-send -i "${icon}" "${msg}" "$(basename -- "$0")"
 
     return 0
