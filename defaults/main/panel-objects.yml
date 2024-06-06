@@ -1,6 +1,6 @@
 ---
 
-zoidy_matecocido_terminal_geometry: "--geometry=130x48+402+89"
+zoidy_panelsweet_terminal_geometry: "--geometry=130x48+402+89"
 
 # YOU: Copy zoidy_panelsweet_vim_launchers to your playbook's group_vars/all
 # or similarly override. Change 'name' and 'edit' for each launcher, and maybe
