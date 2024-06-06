@@ -65,7 +65,7 @@ zoidy_matecocido_dubs_vim_launchers:
 
 # ***
 
-zoidy_matecocido_panel_objects:
+zoidy_panelsweet_panel_objects:
   # Mint Menu is first. See: templates/org-mate-panel.dconf
 
   # NOTE: To regenerate positions after manually rearranging panel launchers, try:

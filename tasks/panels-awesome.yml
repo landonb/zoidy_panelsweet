@@ -82,7 +82,7 @@
 
 - name: Format custom panel object IDs list
   ansible.builtin.set_fact:
-    custom_object_ids: ", '{{ zoidy_matecocido_panel_objects | map(attribute='object_id') | join(list_sep) }}'"
+    custom_object_ids: ", '{{ zoidy_panelsweet_panel_objects | map(attribute='object_id') | join(list_sep) }}'"
 
 # BEWARE: If you specify a position that causes overlap, mate-panel crashes.
 #
@@ -127,7 +127,7 @@
   # 2023-04-22: Default Mint 21.1 shows only 'panel-right-stick=true' usage.
   # - I.e., defaults false, so don't need to specify.
   register: dconf_launcher_cmds
-  loop: "{{ zoidy_matecocido_panel_objects }}"
+  loop: "{{ zoidy_panelsweet_panel_objects }}"
   loop_control:
     index_var: index
 
