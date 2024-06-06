@@ -2,11 +2,11 @@
 
 zoidy_matecocido_terminal_geometry: "--geometry=130x48+402+89"
 
-# YOU: Copy zoidy_matecocido_dubs_vim_launchers to your playbook's group_vars/all
+# YOU: Copy zoidy_panelsweet_vim_launchers to your playbook's group_vars/all
 # or similarly override. Change 'name' and 'edit' for each launcher, and maybe
 # change the 'icon', too, if you've got something better, eh.
 
-zoidy_matecocido_dubs_vim_launchers:
+zoidy_panelsweet_vim_launchers:
   - id: "zoidy-dubs-vim-01"
     name: "Edit File with Dubs Vim #01"
     edit: "{{ ansible_env.HOME }}/Documents/zoidy-dubs-vim-01.rst"

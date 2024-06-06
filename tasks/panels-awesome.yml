@@ -63,7 +63,7 @@
     # USYNC: Syncs with gvim-open-kindness's ${GVIM_OPEN_SERVERNAME:-SAMPI}
     # - See also other playbook's zoidy_matecocido_gvim_servername: "SAMPI"
     zoidy_panelsweet_vim_launcher_servername: "SAMPI"
-  loop: "{{ zoidy_matecocido_dubs_vim_launchers }}"
+  loop: "{{ zoidy_panelsweet_vim_launchers }}"
 
 # ***
 
