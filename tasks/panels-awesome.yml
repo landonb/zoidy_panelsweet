@@ -59,7 +59,7 @@
   vars:
     zoidy_panelsweet_vim_launcher_name: "{{ item.name }}"
     zoidy_panelsweet_vim_launcher_edit: "{{ item.edit }}"
-    zoidy_matecocido_dubs_vim_icon: "{{ item.icon }}"
+    zoidy_panelsweet_vim_launcher_icon: "{{ item.icon }}"
     # USYNC: Syncs with gvim-open-kindness's ${GVIM_OPEN_SERVERNAME:-SAMPI}
     # - See also other playbook's zoidy_matecocido_gvim_servername: "SAMPI"
     zoidy_matecocido_dubs_vim_servername: "SAMPI"
