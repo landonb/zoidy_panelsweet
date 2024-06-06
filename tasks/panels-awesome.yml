@@ -57,7 +57,7 @@
     src: ../templates/dubs-vim.desktop.j2
     dest: "{{ ansible_env.HOME }}/.config/mate/panel2.d/default/launchers/{{ item.id }}.desktop"
   vars:
-    zoidy_matecocido_dubs_vim_name: "{{ item.name }}"
+    zoidy_panelsweet_vim_launcher_name: "{{ item.name }}"
     zoidy_matecocido_dubs_vim_edit: "{{ item.edit }}"
     zoidy_matecocido_dubs_vim_icon: "{{ item.icon }}"
     # USYNC: Syncs with gvim-open-kindness's ${GVIM_OPEN_SERVERNAME:-SAMPI}
