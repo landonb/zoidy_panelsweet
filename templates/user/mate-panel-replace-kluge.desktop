@@ -1,0 +1,20 @@
+# USAGE: Install (copy) to XDG autostart/, e.g.,
+#   command cp -- \
+#     ~/.kit/ansible/roles/zoidy_panelsweet/templates/user/mate-panel-replace-kluge.desktop \
+#     ~/.config/autostart
+# REFER:
+#   https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html
+[Desktop Entry]
+Name=mate-panel-replace-kluge
+GenericName=mate-panel-replace-kluge
+Comment=Ask to replace mate-panel on logon and wake
+# Note that %h is the user home directory.
+#  Exec=%h/.local/bin/restore-mate-panels.sh
+Exec=/private/user/.local/bin/restore-mate-panels.sh
+Terminal=false
+Type=Application
+Icon=cs-desktop
+Categories=GNOME;GTK;Utility;
+Keywords=mate-panels;
+StartupNotify=false
+

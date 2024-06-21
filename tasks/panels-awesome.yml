@@ -251,10 +251,19 @@
 
 # Install service to restore mate-panel layout on unlock
 
-- name: "Create the user systemd service unit to restore mate-panel layout"
+# ISOFF/2024-06-21 14:48: Won't work as service when started before
+# user logons, because won't be connected to user's desktop (though
+# you can restart the service and then it works).
+#
+# - name: "Create the user systemd service unit to restore mate-panel layout"
+#   ansible.builtin.template:
+#     src: user/restore-mate-panels.service
+#     dest: "{{ ansible_env.HOME }}/.config/systemd/user"
+
+- name: "Create the desktop logon autostart unit to restore mate-panel layout"
   ansible.builtin.template:
-    src: user/restore-mate-panels.service
-    dest: "{{ ansible_env.HOME }}/.config/systemd/user"
+    src: user/mate-panel-replace-kluge.desktop
+    dest: "{{ ansible_env.HOME }}/.config/autostart"
 
 - name: "Create the user systemd daemon script to restore mate-panel layout"
   ansible.builtin.template:
@@ -262,16 +271,26 @@
     dest: "{{ ansible_env.HOME }}/.local/bin"
     mode: "0755"
 
-# E.g.,
-#   systemctl --user daemon-reload
-#   systemctl --user enable --now restore-mate-panels.service
-- name: "Start the user systemd timer"
-  ansible.builtin.systemd_service:
-    name: restore-mate-panels.service
-    state: started
-    enabled: true
-    scope: user
-    daemon_reload: true
+# ISOFF/2024-06-21 14:48: Won't work as service; see comment above.
+#
+# # E.g.,
+# #   systemctl --user daemon-reload
+# #   systemctl --user enable --now restore-mate-panels.service
+# - name: "Start the user systemd timer"
+#   ansible.builtin.systemd_service:
+#     name: restore-mate-panels.service
+#     state: started
+#     enabled: true
+#     scope: user
+#     daemon_reload: true
+#
+# DUNNO/2024-06-21: Might this work? Or will Ansible still kill it?
+# - I'll test the next time I onboard a new host... years from now.
+# - DUNNO: The nohup might generate a 'nohup.out' file, too.
+# SAVVY: No need to stop the daemon, b/c the script aborts if already running.
+- name: Starting new daemon
+  ansible.builtin.command: >
+    nohup "{{ ansible_env.HOME }}/.local/bin/restore-mate-panels.sh" &
 
 # ***
 
