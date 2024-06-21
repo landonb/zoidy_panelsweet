@@ -44,6 +44,13 @@
 #   # Feb 16 22:10:19 lethe systemd[1194]: Started Daemon repairs mate-panel layout on (screensaver) unlock.
 # - Restart the service:
 #   systemctl --user restart restore-mate-panels.service
+# - Remove the service:
+#   systemctl --user stop restore-mate-panels.service
+#   systemctl --user disable restore-mate-panels.service
+#   sudo systemctl daemon-reload
+#   sudo systemctl reset-failed
+#   rm ~/.config/systemd/user/restore-mate-panels.service
+#   sudo systemctl revert restore-mate-panels.service
 # - SKIPD: We could make this service for all users, but don't need to do so:
 #     sudo cp ~/.config/systemd/user/restore-mate-panels.service /etc/systemd/user/
 
