@@ -78,7 +78,7 @@ zoidy_panelsweet_panel_objects:
   #
   # and paste them to
   #
-  #   /kit/working/ansible/roles/zoidy_panelsweet/templates/launchers
+  #   ~/.kit/ansible/roles/zoidy_panelsweet/templates/launchers
 
   - object_id: "zoidy-show-desktop"
     launcher_location: "'show-desktop.desktop'"
