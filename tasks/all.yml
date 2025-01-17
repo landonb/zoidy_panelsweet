@@ -1,5 +1,12 @@
 ---
 
+- name: Verify MATE installed
+  stat: path="/usr/bin/mate-session"
+  register: stat_binmatesession
+
+- ansible.builtin.fail: msg="ERROR∷ MATE not installed"
+  when: not stat_binmatesession.stat.exists
+
 - name: Configure and Customize mate-panels
   ansible.builtin.include_role:
     name: zoidy_panelsweet
