@@ -9,6 +9,11 @@
     path: "{{ ansible_env.HOME }}/.local/bin/bash"
   register: local_bin_bash_f
 
+# CXREF/2025-09-07: See DepoXy infuse for similar symlink added to
+# @macOS, so we can share alacritty.toml between hosts (which sets
+# terminal.shell to ~/.local/bin/bash):
+#   infuse_symlinks_macOS_home_local_bin_symlink
+# ~/.depoxy/ambers/home/infuse-platform-macOS @ 410
 - name: Symlink ~/.local/bin/bash if not exists
   ansible.builtin.file:
     src: "/bin/bash"
