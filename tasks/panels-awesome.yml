@@ -5,7 +5,8 @@
 # Ensure ~/.local/bin/bash exists, which some panel launchers use rather
 # than, e.g., /bin/bash. This is useful if you want to use a custom Bash.
 - name: Stat ~/.local/bin/bash
-  ansible.builtin.stat: path="{{ ansible_env.HOME }}/.local/bin/bash"
+  ansible.builtin.stat:
+    path: "{{ ansible_env.HOME }}/.local/bin/bash"
   register: local_bin_bash_f
 
 - name: Symlink ~/.local/bin/bash if not exists
