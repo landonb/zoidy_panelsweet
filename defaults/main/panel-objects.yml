@@ -9,59 +9,59 @@ zoidy_panelsweet_terminal_geometry: "--geometry=130x48+402+89"
 zoidy_panelsweet_vim_launchers:
   - id: "zoidy-dubs-vim-01"
     name: "Edit File with Dubs Vim #01"
-    edit: "{{ ansible_env.HOME }}/Documents/zoidy-dubs-vim-01.rst"
-    icon: "{{ ansible_env.HOME }}/.config/zoidy_matecocido/icons/cheese_1071146.svg"
+    edit: "{{ ansible_facts['env']['HOME'] }}/Documents/zoidy-dubs-vim-01.rst"
+    icon: "{{ ansible_facts['env']['HOME'] }}/.config/zoidy_matecocido/icons/cheese_1071146.svg"
 
   - id: "zoidy-dubs-vim-02"
     name: "Edit File with Dubs Vim #02"
-    edit: "{{ ansible_env.HOME }}/Documents/zoidy-dubs-vim-02.rst"
-    icon: "{{ ansible_env.HOME }}/.config/zoidy_matecocido/icons/rat_616735.png"
+    edit: "{{ ansible_facts['env']['HOME'] }}/Documents/zoidy-dubs-vim-02.rst"
+    icon: "{{ ansible_facts['env']['HOME'] }}/.config/zoidy_matecocido/icons/rat_616735.png"
 
   - id: "zoidy-dubs-vim-03"
     name: "Edit File with Dubs Vim #03"
-    edit: "{{ ansible_env.HOME }}/Documents/zoidy-dubs-vim-03.rst"
-    icon: "{{ ansible_env.HOME }}/.config/zoidy_matecocido/icons/luicy.png"
+    edit: "{{ ansible_facts['env']['HOME'] }}/Documents/zoidy-dubs-vim-03.rst"
+    icon: "{{ ansible_facts['env']['HOME'] }}/.config/zoidy_matecocido/icons/luicy.png"
 
   - id: "zoidy-dubs-vim-04"
     name: "Edit File with Dubs Vim #04"
-    edit: "{{ ansible_env.HOME }}/Documents/zoidy-dubs-vim-04.rst"
-    icon: "{{ ansible_env.HOME }}/.config/zoidy_matecocido/icons/chemistry_1156950.svg"
+    edit: "{{ ansible_facts['env']['HOME'] }}/Documents/zoidy-dubs-vim-04.rst"
+    icon: "{{ ansible_facts['env']['HOME'] }}/.config/zoidy_matecocido/icons/chemistry_1156950.svg"
 
   - id: "zoidy-dubs-vim-05"
     name: "Edit File with Dubs Vim #05"
-    edit: "{{ ansible_env.HOME }}/Documents/zoidy-dubs-vim-05.rst"
-    icon: "{{ ansible_env.HOME }}/.config/zoidy_matecocido/icons/fish-food_1303544.svg"
+    edit: "{{ ansible_facts['env']['HOME'] }}/Documents/zoidy-dubs-vim-05.rst"
+    icon: "{{ ansible_facts['env']['HOME'] }}/.config/zoidy_matecocido/icons/fish-food_1303544.svg"
 
   - id: "zoidy-dubs-vim-06"
     name: "Edit File with Dubs Vim #06"
-    edit: "{{ ansible_env.HOME }}/Documents/zoidy-dubs-vim-06.rst"
+    edit: "{{ ansible_facts['env']['HOME'] }}/Documents/zoidy-dubs-vim-06.rst"
     # 2020-03-18: As always with icons, you use one as a "test" and it sticks!
     # - Well, I used Bender's Burglar Arson Arceny as the Vim Alt-tab icon,
     #   and now I'm annoyed it's used twice, so let's try zoidy for the file
     #   launcher icon. (Because I'm too lazy to rebuild Vim, or because I'd
     #   prefer Bender in Alt-tab over Zoidberg?)
-    #  icon: "{{ ansible_env.HOME }}/.config/zoidy_matecocido/icons/burglarsonarceny.png"
-    icon: "{{ ansible_env.HOME }}/.config/zoidy_matecocido/icons/zoidy-uhhhh-128x128.png"
+    #  icon: "{{ ansible_facts['env']['HOME'] }}/.config/zoidy_matecocido/icons/burglarsonarceny.png"
+    icon: "{{ ansible_facts['env']['HOME'] }}/.config/zoidy_matecocido/icons/zoidy-uhhhh-128x128.png"
 
   - id: "zoidy-dubs-vim-07"
     name: "Edit File with Dubs Vim #07"
-    edit: "{{ ansible_env.HOME }}/Documents/zoidy-dubs-vim-07.rst"
-    icon: "{{ ansible_env.HOME }}/.config/zoidy_matecocido/icons/lime_135761.svg"
+    edit: "{{ ansible_facts['env']['HOME'] }}/Documents/zoidy-dubs-vim-07.rst"
+    icon: "{{ ansible_facts['env']['HOME'] }}/.config/zoidy_matecocido/icons/lime_135761.svg"
 
   - id: "zoidy-dubs-vim-08"
     name: "Edit File with Dubs Vim #08"
-    edit: "{{ ansible_env.HOME }}/Documents/zoidy-dubs-vim-08.rst"
-    icon: "{{ ansible_env.HOME }}/.config/zoidy_matecocido/icons/lemon_1087423.svg"
+    edit: "{{ ansible_facts['env']['HOME'] }}/Documents/zoidy-dubs-vim-08.rst"
+    icon: "{{ ansible_facts['env']['HOME'] }}/.config/zoidy_matecocido/icons/lemon_1087423.svg"
 
   - id: "zoidy-dubs-vim-09"
     name: "Edit File with Dubs Vim #09"
-    edit: "{{ ansible_env.HOME }}/Documents/zoidy-dubs-vim-09.rst"
-    icon: "{{ ansible_env.HOME }}/.config/zoidy_matecocido/icons/water_413844.svg"
+    edit: "{{ ansible_facts['env']['HOME'] }}/Documents/zoidy-dubs-vim-09.rst"
+    icon: "{{ ansible_facts['env']['HOME'] }}/.config/zoidy_matecocido/icons/water_413844.svg"
 
   - id: "zoidy-dubs-vim-10"
     name: "Edit File with Dubs Vim #10"
-    edit: "{{ ansible_env.HOME }}/Documents/zoidy-dubs-vim-10.rst"
-    icon: "{{ ansible_env.HOME }}/.config/zoidy_matecocido/icons/lime-juice_167255.svg"
+    edit: "{{ ansible_facts['env']['HOME'] }}/Documents/zoidy-dubs-vim-10.rst"
+    icon: "{{ ansible_facts['env']['HOME'] }}/.config/zoidy_matecocido/icons/lime-juice_167255.svg"
 
 # ***
 
@@ -211,7 +211,7 @@ zoidy_panelsweet_panel_objects:
     #  launcher_location: "'/usr/share/applications/slack.desktop'"
     # If installed via Flatpak, don't use the included Desktop file,
     # which uses zypak, which we don't want to use (and is not installed):
-    #  launcher_location: "'{{ ansible_env.HOME }}/.local/share/flatpak/app/com.slack.Slack/current/active/files/share/applications/com.slack.Slack.desktop'"
+    #  launcher_location: "'{{ ansible_facts['env']['HOME'] }}/.local/share/flatpak/app/com.slack.Slack/current/active/files/share/applications/com.slack.Slack.desktop'"
     launcher_location: "'slack.desktop'"
     position: "25"
 
@@ -226,7 +226,7 @@ zoidy_panelsweet_panel_objects:
     #  launcher_location: "'/var/lib/flatpak/exports/share/applications/org.gimp.GIMP.desktop'"
     # SAVVY/2023-04-23: Expects gimp-2.10 found, which you can put at ~/.local/bin/gimp-2.10.
     # - CXREF: ~/.kit/ansible/roles/zoidy_captivator/tasks/install-flatpaks.yml
-    launcher_location: "'{{ ansible_env.HOME }}/.local/share/flatpak/app/org.gimp.GIMP/current/active/files/share/applications/org.gimp.GIMP.desktop'"
+    launcher_location: "'{{ ansible_facts['env']['HOME'] }}/.local/share/flatpak/app/org.gimp.GIMP/current/active/files/share/applications/org.gimp.GIMP.desktop'"
     position: "27"
 
   - object_id: "zoidy-launcher-virtualbox"

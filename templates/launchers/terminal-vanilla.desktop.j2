@@ -4,8 +4,8 @@
 TryExec=mate-terminal
 # Reset PATH, lest it's a copy of your (full) mate-desktop PATH
 Exec=/bin/bash -c "PATH=$(getconf PATH) mate-terminal -e '/bin/bash --noprofile --norc' --geometry=130x48+402+89"
-Icon={{ ansible_env.HOME }}/.config/zoidy_matecocido/icons/terminal_and-breads_1343964.svg
-Icon[en_US]={{ ansible_env.HOME }}/.config/zoidy_matecocido/icons/terminal_and-breads_1343964.svg
+Icon={{ ansible_facts['env']['HOME'] }}/.config/zoidy_matecocido/icons/terminal_and-breads_1343964.svg
+Icon[en_US]={{ ansible_facts['env']['HOME'] }}/.config/zoidy_matecocido/icons/terminal_and-breads_1343964.svg
 Type=Application
 X-MATE-DocPath=mate-terminal/index.html
 X-MATE-Bugzilla-Bugzilla=MATE

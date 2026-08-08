@@ -6,7 +6,7 @@
 # than, e.g., /bin/bash. This is useful if you want to use a custom Bash.
 - name: Stat ~/.local/bin/bash
   ansible.builtin.stat:
-    path: "{{ ansible_env.HOME }}/.local/bin/bash"
+    path: "{{ ansible_facts['env']['HOME'] }}/.local/bin/bash"
   register: local_bin_bash_f
 
 # CXREF/2025-09-07: See DepoXy infuse for similar symlink added to
@@ -17,7 +17,7 @@
 - name: Symlink ~/.local/bin/bash if not exists
   ansible.builtin.file:
     src: "/bin/bash"
-    dest: "{{ ansible_env.HOME }}/.local/bin/bash"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.local/bin/bash"
     state: link
   when: not local_bin_bash_f.stat.exists
 
@@ -39,20 +39,20 @@
 - name: Clear Existing MATE Panel Launcher Files
   ansible.builtin.file:
     state: absent
-    path: "{{ ansible_env.HOME }}/.config/mate/panel2.d/default/launchers/"
+    path: "{{ ansible_facts['env']['HOME'] }}/.config/mate/panel2.d/default/launchers/"
 
 # CPYST:
 #   ll ~/.config/mate/panel2.d/default/launchers/
 - name: Ensure MATE Panel Launcher Directory Exists
   ansible.builtin.file:
     state: directory
-    path: "{{ ansible_env.HOME }}/.config/mate/panel2.d/default/launchers/"
+    path: "{{ ansible_facts['env']['HOME'] }}/.config/mate/panel2.d/default/launchers/"
 
 - name: Deploy Most MATE Panel Launchers
   ansible.builtin.template:
     src: "{{ item }}"
     dest:
-      "{{ ansible_env.HOME }}/.config/mate/panel2.d/default/launchers/{{
+      "{{ ansible_facts['env']['HOME'] }}/.config/mate/panel2.d/default/launchers/{{
         item | basename | regex_replace('\\.j2$','')
       }}"
   with_fileglob:
@@ -61,7 +61,7 @@
 - name: Deploy Dubs Vim Edit MATE Panel Launchers \#s 1-10
   ansible.builtin.template:
     src: ../templates/dubs-vim.desktop.j2
-    dest: "{{ ansible_env.HOME }}/.config/mate/panel2.d/default/launchers/{{ item.id }}.desktop"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.config/mate/panel2.d/default/launchers/{{ item.id }}.desktop"
   vars:
     zoidy_panelsweet_vim_launcher_name: "{{ item.name }}"
     zoidy_panelsweet_vim_launcher_edit: "{{ item.edit }}"
@@ -78,7 +78,7 @@
 - name: Deploy (Synchronize) MATE Panel Launcher Icons
   ansible.builtin.synchronize:
     src: "../files/launcher-icons/"
-    dest: "{{ ansible_env.HOME }}/.config/zoidy_matecocido/icons/"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.config/zoidy_matecocido/icons/"
     delete: yes
 
 # ***
@@ -186,7 +186,7 @@
 
 - name: Hide vertical ellipsis from window-list and from notification area
   ansible.builtin.lineinfile:
-    path: "{{ ansible_env.HOME }}/.config/gtk-3.0/gtk.css"
+    path: "{{ ansible_facts['env']['HOME'] }}/.config/gtk-3.0/gtk.css"
     line: 'MatePanelAppletFrameDBus > MatePanelAppletFrameDBus { background: none; }'
     regexp: '^MatePanelAppletFrameDBus > MatePanelAppletFrameDBus { background: none; }$'
     create: true
@@ -248,12 +248,12 @@
 - name: Ensure MATE Panel dconf dump directory exists
   ansible.builtin.file:
     state: directory
-    path: "{{ ansible_env.HOME }}/.local/share/zoidy_panelsweet/"
+    path: "{{ ansible_facts['env']['HOME'] }}/.local/share/zoidy_panelsweet/"
 
 - name: Capture MATE Panel dconf dump (for mate-panel logon reset kludge)
   ansible.builtin.shell:
     dconf dump /org/mate/panel/ \
-      > "{{ ansible_env.HOME }}/.local/share/zoidy_panelsweet/dconf--org-mate-panel.dump"
+      > "{{ ansible_facts['env']['HOME'] }}/.local/share/zoidy_panelsweet/dconf--org-mate-panel.dump"
 
 # Install service to restore mate-panel layout on unlock
 
@@ -264,17 +264,17 @@
 # - name: "Create the user systemd service unit to restore mate-panel layout"
 #   ansible.builtin.template:
 #     src: user/restore-mate-panels.service
-#     dest: "{{ ansible_env.HOME }}/.config/systemd/user"
+#     dest: "{{ ansible_facts['env']['HOME'] }}/.config/systemd/user"
 
 - name: "Create the desktop logon autostart unit to restore mate-panel layout"
   ansible.builtin.template:
     src: user/mate-panel-replace-kluge.desktop
-    dest: "{{ ansible_env.HOME }}/.config/autostart"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.config/autostart"
 
 - name: "Create the user systemd daemon script to restore mate-panel layout"
   ansible.builtin.template:
     src: user/restore-mate-panels.sh
-    dest: "{{ ansible_env.HOME }}/.local/bin"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.local/bin"
     mode: "0755"
 
 # ISOFF/2024-06-21 14:48: Won't work as service; see comment above.
@@ -296,7 +296,7 @@
 # SAVVY: No need to stop the daemon, b/c the script aborts if already running.
 - name: Starting new daemon
   ansible.builtin.command: >
-    nohup "{{ ansible_env.HOME }}/.local/bin/restore-mate-panels.sh" &
+    nohup "{{ ansible_facts['env']['HOME'] }}/.local/bin/restore-mate-panels.sh" &
 
 # ***
 
