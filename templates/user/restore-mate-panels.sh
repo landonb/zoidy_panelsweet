@@ -54,14 +54,16 @@ DCONF_DUMP_AFTER="/tmp/restore-mate-panels.dump.after"
 
 __CPYST__="$(
 cat <<'EOF'
-  icon_theme="$( \
-    gsettings get org.mate.interface icon-theme \
-    | sed "s/^'//" | sed "s/'\$//"
-  )"
-  # Open gthumb, then look for *48/ directories.
-  gthumb /usr/share/icons/${icon_theme}/ &
-  # ALTLY: (BWARE: Don't run similar using gthumb):
-  eog $(find /usr/share/icons/${icon_theme} -path *48/*.png)
+  # icon_theme="$( \
+  #   gsettings get org.mate.interface icon-theme \
+  #   | sed "s/^'//" | sed "s/'\$//"
+  # )"
+  # # Open gthumb, then look for *48/ directories.
+  # gthumb /usr/share/icons/${icon_theme}/ &
+  # # ALTLY: (BWARE: Don't run similar using gthumb):
+  # eog $(find /usr/share/icons/${icon_theme} -path *48/*.png)
+
+  gthumb /usr/share/icons/${XDG_CURRENT_DESKTOP,,}/48x48/emotes/ &
 EOF
 )"
 
